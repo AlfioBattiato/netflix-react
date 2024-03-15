@@ -16,9 +16,6 @@ body {
   margin: 0px;
 }
 
-footer .col-12 svg {
-  margin-right: 15px;
-}
 
 body {
   background-color: #141414 !important;
@@ -28,14 +25,6 @@ body {
   background-color: #141414;
 }
 
-#navProfile {
-  background: rgb(0, 0, 0);
-  background: linear-gradient(180deg, rgb(0, 0, 0) 0%, rgb(17, 17, 17) 77%, rgb(20, 20, 20) 100%);
-}
-
-#edit {
-  font-size: 4rem;
-}
 
 .grey {
   background-color: #333333;
@@ -51,7 +40,8 @@ body {
 
 img:hover {
   cursor: pointer;
-  scale: 1.2;
+  scale: 1.05;
+  transition: all 0.3s;
 }
 
 .settings {
