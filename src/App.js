@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import "./App.css";
 import MyNavbar from "./components/MyNavbar";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -6,11 +7,14 @@ import ContainerCards from "./components/ContainerCards";
 import MyFooter from "./components/MyFooter";
 
 function App() {
+  const [Ricerca, setRicerca] = useState("");
+
   return (
     <div>
-      <MyNavbar></MyNavbar>
+      <MyNavbar updateRicerca={setRicerca}></MyNavbar>
+
       <Tvshow></Tvshow>
-      <ContainerCards></ContainerCards>
+      <ContainerCards object={Ricerca}></ContainerCards>
       <MyFooter></MyFooter>
     </div>
   );
