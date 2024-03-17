@@ -22,7 +22,7 @@ body {
 }
 
 #input {
-  background-color: #141414;
+  background-color: black;
 }
 
 
@@ -30,7 +30,7 @@ body {
   background-color: #333333;
 }
 .dk{
-  background-color: #141414 !important;
+  background-color: black !important;
   border-radius: 0 !important;
 }
 

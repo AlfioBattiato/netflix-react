@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 
 function Tvshow() {
   return (
-    <div className="container-xxxl">
+    <div className="container-xxxl pt-5">
       <div className="d-flex justify-content-between">
         <div className="d-flex gap-4 align-items-center">
           <h2>Tv Shows</h2>

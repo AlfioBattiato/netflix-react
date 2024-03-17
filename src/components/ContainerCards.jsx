@@ -6,7 +6,7 @@ import MySpinner from "./MySpinner";
 class ContainerCards extends Component {
   state = {
     allHarry: [],
-    allStar: [],
+    allLove: [],
     allLord: [],
     allSearch: [],
     spinner: true,
@@ -37,7 +37,7 @@ class ContainerCards extends Component {
 
   componentDidMount() {
     this.getFetch("harry", "allHarry");
-    this.getFetch("star", "allStar");
+    this.getFetch("love", "allLove");
     this.getFetch("Lord", "allLord");
   }
 
@@ -57,7 +57,7 @@ class ContainerCards extends Component {
 
   render() {
     // creo questi parametri per non richiamarmi  più volte i dati con this.state
-    const { spinner, allHarry, allStar, allLord, allSearch, spinner2 } =
+    const { spinner, allHarry, allLove, allLord, allSearch, spinner2 } =
       this.state;
   
 
@@ -85,7 +85,7 @@ class ContainerCards extends Component {
         {/* Risultati ricerca */}
         {allSearch && allSearch.length > 0 && (
           <div>
-            <Row className="gx-2 gy-2">
+            <Row className="gx-3 gy-2">
               <h3 className="pt-5">Risultati ricerca:</h3>
               {allSearch.slice(0, 6).map((film) => (
                 <MyCard image={film.Poster} key={film.imdbID} />
@@ -96,7 +96,7 @@ class ContainerCards extends Component {
 
         {/* Trending Now */}
         <h3 className="pt-5">Trending Now</h3>
-        <Row className="gx-2 gy-2">
+        <Row className="gx-3 gy-2">
           {spinner && <MySpinner />}
           {allHarry.slice(0, 6).map((film) => (
             <MyCard image={film.Poster} key={film.imdbID} />
@@ -105,16 +105,16 @@ class ContainerCards extends Component {
 
         {/* Watch it Again */}
         <h3 className="pt-5">Watch it Again</h3>
-        <Row className="gx-2 gy-2">
+        <Row className="gx-3 gy-2">
           {spinner && <MySpinner />}
-          {allStar.slice(0, 6).map((film) => (
+          {allLove.slice(0, 6).map((film) => (
             <MyCard image={film.Poster} key={film.imdbID} />
           ))}
         </Row>
 
         {/* New Releases */}
         <h3 className="pt-5">New Releases</h3>
-        <Row className="gx-2 gy-2">
+        <Row className="gx-3 gy-2">
           {spinner && <MySpinner />}
           {allLord.slice(0, 6).map((film) => (
             <MyCard image={film.Poster} key={film.imdbID} />

@@ -71,9 +71,9 @@ function MyNavbar(props) {
             </Nav.Link>
             {/*--------------------------------------------------------------- freccia dropdown */}
             <Dropdown align="end">
-              <Dropdown.Toggle variant="" id="dropdown-basic"></Dropdown.Toggle>
-              <Dropdown.Menu>
-                <Dropdown.Item href="#/">Profile</Dropdown.Item>
+              <Dropdown.Toggle variant="" id="dropdown-basic" className="dk"></Dropdown.Toggle>
+              <Dropdown.Menu className="dk">
+                <Dropdown.Item  href="#/">Profile</Dropdown.Item>
                 <Dropdown.Item href="#/">My list </Dropdown.Item>
                 <Dropdown.Item href="#/">Setting</Dropdown.Item>
               </Dropdown.Menu>
