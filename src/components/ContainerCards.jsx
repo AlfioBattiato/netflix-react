@@ -65,7 +65,9 @@ class ContainerCards extends Component {
       <div className="container-xxxl">
         {/* Campo di ricerca */}
         {spinner2 && (
+          
           <div>
+
             <h3 className="pt-5">Sto cercando:</h3>
             <p>
               <i>
@@ -88,7 +90,7 @@ class ContainerCards extends Component {
             <Row className="gx-3 gy-2">
               <h3 className="pt-5">Risultati ricerca:</h3>
               {allSearch.slice(0, 6).map((film) => (
-                <MyCard image={film.Poster} key={film.imdbID} />
+                <MyCard image={film.Poster} key={film.imdbID} id={film.imdbID} />
               ))}
             </Row>
           </div>
@@ -99,7 +101,7 @@ class ContainerCards extends Component {
         <Row className="gx-3 gy-2">
           {spinner && <MySpinner />}
           {allHarry.slice(0, 6).map((film) => (
-            <MyCard image={film.Poster} key={film.imdbID} />
+            <MyCard image={film.Poster} key={film.imdbID} id={film.imdbID} />
           ))}
         </Row>
 
@@ -108,7 +110,7 @@ class ContainerCards extends Component {
         <Row className="gx-3 gy-2">
           {spinner && <MySpinner />}
           {allLove.slice(0, 6).map((film) => (
-            <MyCard image={film.Poster} key={film.imdbID} />
+            <MyCard image={film.Poster} key={film.imdbID} id={film.imdbID} />
           ))}
         </Row>
 
@@ -117,7 +119,7 @@ class ContainerCards extends Component {
         <Row className="gx-3 gy-2">
           {spinner && <MySpinner />}
           {allLord.slice(0, 6).map((film) => (
-            <MyCard image={film.Poster} key={film.imdbID} />
+            <MyCard image={film.Poster} key={film.imdbID} id={film.imdbID}  />
           ))}
         </Row>
       </div>

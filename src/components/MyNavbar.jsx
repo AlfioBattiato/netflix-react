@@ -4,8 +4,11 @@ import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Dropdown from "react-bootstrap/Dropdown";
+import { Link ,useLocation } from "react-router-dom";
 
 function MyNavbar(props) {
+
+  const location = useLocation()
   return (
     <Navbar expand="lg" className="dk" data-bs-theme="dark">
       <Container fluid>
@@ -15,8 +18,13 @@ function MyNavbar(props) {
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav className="me-auto my-2 my-lg-0" navbarScroll>
-            <Nav.Link href="#">Home</Nav.Link>
-            <Nav.Link href="#">TvShow</Nav.Link>
+            <Link to={'/'} className={location.pathname === '/' ? 'nav-link active' : 'nav-link'}>
+              Home
+            </Link>
+            <Link to={'/Tvshow'} className={location.pathname === '/Tvshow' ? 'nav-link active' : 'nav-link'}>
+              Tvshow
+            </Link>
+
             <Nav.Link href="#">Movies</Nav.Link>
             <Nav.Link href="#">Recently Added</Nav.Link>
             <Nav.Link href="#">My List</Nav.Link>
@@ -71,9 +79,13 @@ function MyNavbar(props) {
             </Nav.Link>
             {/*--------------------------------------------------------------- freccia dropdown */}
             <Dropdown align="end">
-              <Dropdown.Toggle variant="" id="dropdown-basic" className="dk"></Dropdown.Toggle>
+              <Dropdown.Toggle
+                variant=""
+                id="dropdown-basic"
+                className="dk"
+              ></Dropdown.Toggle>
               <Dropdown.Menu className="dk">
-                <Dropdown.Item  href="#/">Profile</Dropdown.Item>
+                <Dropdown.Item href="#/">Profile</Dropdown.Item>
                 <Dropdown.Item href="#/">My list </Dropdown.Item>
                 <Dropdown.Item href="#/">Setting</Dropdown.Item>
               </Dropdown.Menu>

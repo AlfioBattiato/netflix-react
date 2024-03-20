@@ -6,19 +6,36 @@ import Tvshow from "./components/Tvshow";
 import ContainerCards from "./components/ContainerCards";
 import MyFooter from "./components/MyFooter";
 import MyHeader from "./components/MyHeader";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import FilmDetails from "./components/FilmDetails";
 
 function App() {
   const [Ricerca, setRicerca] = useState("");
 
   return (
-    <div>
-      <MyNavbar updateRicerca={setRicerca}></MyNavbar>
-      <MyHeader></MyHeader>
+    <BrowserRouter>
+      <div>
+        <MyNavbar updateRicerca={setRicerca}></MyNavbar>
 
-      <Tvshow></Tvshow>
-      <ContainerCards object={Ricerca}></ContainerCards>
-      <MyFooter></MyFooter>
-    </div>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <MyHeader></MyHeader>
+                <ContainerCards object={Ricerca}></ContainerCards>
+              </>
+            }
+          ></Route>
+
+          <Route path="/Tvshow" element={<Tvshow></Tvshow>} />
+          <Route path="/Detail/:filmId" element={<FilmDetails></FilmDetails>} />
+
+        </Routes>
+
+        <MyFooter></MyFooter>
+      </div>
+    </BrowserRouter>
   );
 }
 
