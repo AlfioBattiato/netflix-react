@@ -4,24 +4,59 @@ import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Dropdown from "react-bootstrap/Dropdown";
-import { Link ,useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 
 function MyNavbar(props) {
+  const [isScrolled, setIsScrolled] = useState(false);
 
-  const location = useLocation()
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 200) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const location = useLocation();
   return (
-    <Navbar expand="lg" className="dk" data-bs-theme="dark">
+    <Navbar
+      fixed={location.pathname === "/" ? "top" : ""}
+      expand="lg"
+      className={
+        isScrolled
+          ? "w-100 bg-black  navbar-scrolled"
+          : "w-100 dk navbar-scrolled"
+      }
+    >
       <Container fluid>
-        <Navbar.Brand>
-          <img src="assets/netflix_logo.png" alt="logo" width={"120rem"}></img>
-        </Navbar.Brand>
+        <img src="assets/netflix_logo.png" alt="logo" width={"120rem"}></img>
+
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav className="me-auto my-2 my-lg-0" navbarScroll>
-            <Link to={'/'} className={location.pathname === '/' ? 'nav-link active' : 'nav-link'}>
+            <Link
+              to={"/"}
+              className={
+                location.pathname === "/" ? "nav-link active" : "nav-link"
+              }
+            >
               Home
             </Link>
-            <Link to={'/Tvshow'} className={location.pathname === '/Tvshow' ? 'nav-link active' : 'nav-link'}>
+            <Link
+              to={"/Tvshow"}
+              className={
+                location.pathname === "/Tvshow" ? "nav-link active" : "nav-link"
+              }
+            >
               Tvshow
             </Link>
 
@@ -79,11 +114,7 @@ function MyNavbar(props) {
             </Nav.Link>
             {/*--------------------------------------------------------------- freccia dropdown */}
             <Dropdown align="end">
-              <Dropdown.Toggle
-                variant=""
-                id="dropdown-basic"
-                className="dk"
-              ></Dropdown.Toggle>
+              <Dropdown.Toggle variant="" id="dropdown-basic"></Dropdown.Toggle>
               <Dropdown.Menu className="dk">
                 <Dropdown.Item href="#/">Profile</Dropdown.Item>
                 <Dropdown.Item href="#/">My list </Dropdown.Item>

@@ -16,32 +16,41 @@ body {
   margin: 0px;
 }
 
+.multiple{
+background-color: rgb(196, 196, 196);
+background-blend-mode: multiply;
 
+}
 body {
   background-color: #141414 !important;
 }
 
 #input {
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0);
 }
 
+.navbar-scrolled {
+  transition: all 0.3s ease; 
+}
 
 .grey {
   background-color: #333333;
 }
 .dk{
-  background-color: black !important;
+  background-color: rgba(0, 0, 0, 0.658) !important;
   border-radius: 0 !important;
 }
 
-.profile:hover {
-  background-color: white !important;
-}
 
 img:hover {
   cursor: pointer;
   scale: 1.05;
   transition: all 0.3s;
+}
+.navbar img:hover{
+  cursor: unset;
+  scale: 1;
+
 }
 
 .settings {

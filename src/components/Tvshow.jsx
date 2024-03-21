@@ -32,7 +32,7 @@ function Tvshow() {
         <h3 className="pt-5">Serie televisive:</h3>
         <Row className="gx-3 gy-2">
           {lista.map((film) => (
-            <MyCard image={film.Poster} key={film.imdbID} />
+            <MyCard image={film.Poster} key={film.imdbID} id={film.imdbID} />
           ))}
         </Row>
       </div>

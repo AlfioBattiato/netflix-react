@@ -37,8 +37,8 @@ class ContainerCards extends Component {
 
   componentDidMount() {
     this.getFetch("harry", "allHarry");
-    this.getFetch("love", "allLove");
-    this.getFetch("Lord", "allLord");
+    this.getFetch("marvel", "allLove");
+    this.getFetch("dune", "allLord");
   }
 
   componentDidUpdate(prevProps) {
