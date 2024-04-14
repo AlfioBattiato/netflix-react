@@ -42,7 +42,7 @@ body {
 }
 
 
-img:hover {
+.scale {
   cursor: pointer;
   scale: 1.05;
   transition: all 0.3s;

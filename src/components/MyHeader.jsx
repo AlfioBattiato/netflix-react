@@ -19,6 +19,38 @@ function MyHeader() {
         onSelect={handleSelect}
         className="text-white"
       >
+         <Carousel.Item>
+          <div
+            className="multiple"
+            style={{
+              backgroundImage:
+                "url(https://image.tmdb.org/t/p/original/nb3xI8XI3w4pMVZ38VijbsyBqP4.jpg)",
+
+              backgroundSize: "cover",
+              height: "72vh",
+              width: "100%",
+              backgroundPositionY: "center",
+              display: "flex",
+              justifyContent: "center",
+            }}
+          ></div>
+          <Carousel.Caption>
+            <div className="text-start">
+              <div className="d-flex  flex-row align-items-center">
+                <h1 className="display-1 text-start text-light">Oppenheimer</h1>
+               
+              </div>
+
+              <h4 className=" display-6 text-start text-light">
+                The story of American scientist J. Robert Oppenheimer and his
+                role in the development of the atomic bomb.
+              </h4>
+              <Button variant="light" size="lg"  onClick={()=>{navigate("/Detail/tt15398776")}}>
+                  Info
+                </Button>
+            </div>
+          </Carousel.Caption>
+        </Carousel.Item>
         <Carousel.Item>
           <div
             className="multiple"
@@ -27,19 +59,16 @@ function MyHeader() {
                 "url(https://image.tmdb.org/t/p/original/2rmK7mnchw9Xr3XdiTFSxTTLXqv.jpg)",
 
               backgroundSize: "cover",
-              height: "70vh",
+              height: "72vh",
               backgroundPosition: "center",
               display: "flex",
               justifyContent: "center",
             }}
           ></div>
           <Carousel.Caption>
-            <div>
+            <div className="text-start" >
               <div className="d-flex  flex-row align-items-center">
                 <h1 className="display-1 text-start text-light">One Piece</h1>
-                <Button variant="light" size="lg" className="ms-4" onClick={()=>{navigate("/Detail/tt0388629")}}>
-                  Info
-                </Button>
               </div>
 
               <h4 className=" display-6 text-start text-light">
@@ -47,6 +76,9 @@ function MyHeader() {
                 hopes of finding the greatest treasure ever, known as the "One
                 Piece."
               </h4>
+                <Button variant="light" size="lg"  onClick={()=>{navigate("/Detail/tt0388629")}}>
+                  Info
+                </Button>
             </div>
           </Carousel.Caption>
         </Carousel.Item>
@@ -58,21 +90,18 @@ function MyHeader() {
                 "url(https://image.tmdb.org/t/p/original/87IVlclAfWL6mdicU1DDuxdwXwe.jpg)",
 
               backgroundSize: "cover",
-              height: "70vh",
+              height: "72vh",
               backgroundPosition: "center",
               display: "flex",
               justifyContent: "center",
             }}
           ></div>
           <Carousel.Caption>
-            <div>
+            <div className="text-start">
               <div className="d-flex  flex-row align-items-center">
                 <h1 className="display-1 text-start text-light">
                   Dune: Part Two
                 </h1>
-                <Button variant="light" size="lg" className="ms-4"onClick={()=>{navigate("/Detail/tt15239678")}}>
-                  Info
-                </Button>
               </div>
 
               <h4 className=" display-6 text-start text-light">
@@ -80,6 +109,9 @@ function MyHeader() {
                 galaxy's most valuable asset while its heir becomes troubled by
                 visions of a dark future.
               </h4>
+                <Button variant="light" size="lg" onClick={()=>{navigate("/Detail/tt15239678")}}>
+                  Info
+                </Button>
             </div>
           </Carousel.Caption>
         </Carousel.Item>
@@ -91,19 +123,16 @@ function MyHeader() {
                 "url(https://image.tmdb.org/t/p/original/feSiISwgEpVzR1v3zv2n2AU4ANJ.jpg)",
 
               backgroundSize: "cover",
-              height: "70vh",
+              height: "72vh",
               backgroundPosition: "center",
               display: "flex",
               justifyContent: "center",
             }}
           ></div>{" "}
           <Carousel.Caption>
-            <div>
+            <div className="text-start">
               <div className="d-flex  flex-row align-items-center">
                 <h1 className="display-1 text-start text-light">The Marvels</h1>
-                <Button variant="light" size="lg" className="ms-4" onClick={()=>{navigate("/Detail/tt10676048")}}>
-                  Info
-                </Button>
               </div>
 
               <h4 className=" display-6 text-start text-light">
@@ -111,40 +140,13 @@ function MyHeader() {
                 Khan and Monica Rambeau, forcing them to work together to save
                 the universe.
               </h4>
-            </div>
-          </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item>
-          <div
-            className="multiple"
-            style={{
-              backgroundImage:
-                "url(https://image.tmdb.org/t/p/original/nb3xI8XI3w4pMVZ38VijbsyBqP4.jpg)",
-
-              backgroundSize: "cover",
-              height: "70vh",
-              width: "100%",
-              backgroundPositionY: "center",
-              display: "flex",
-              justifyContent: "center",
-            }}
-          ></div>
-          <Carousel.Caption>
-            <div>
-              <div className="d-flex  flex-row align-items-center">
-                <h1 className="display-1 text-start text-light">Oppenheimer</h1>
-                <Button variant="light" size="lg" className="ms-4" onClick={()=>{navigate("/Detail/tt15398776")}}>
+                <Button variant="light" size="lg"  onClick={()=>{navigate("/Detail/tt10676048")}}>
                   Info
                 </Button>
-              </div>
-
-              <h4 className=" display-6 text-start text-light">
-                The story of American scientist J. Robert Oppenheimer and his
-                role in the development of the atomic bomb.
-              </h4>
             </div>
           </Carousel.Caption>
         </Carousel.Item>
+       
       </Carousel>
 
       <div className="container-xxxl pt-5">

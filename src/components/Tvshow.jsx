@@ -29,7 +29,7 @@ function Tvshow() {
   return (
     <>
       <div className="container-xxxl">
-        <h3 className="pt-5">Serie televisive:</h3>
+        <h3 className="pt-5">Tv show:</h3>
         <Row className="gx-3 gy-2">
           {lista.map((film) => (
             <MyCard image={film.Poster} key={film.imdbID} id={film.imdbID} />

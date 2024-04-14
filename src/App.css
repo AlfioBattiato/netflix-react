@@ -1,0 +1,37 @@
+.slider-container {
+    max-width: 100% !important;
+}
+@keyframes slideIn {
+    from {
+        bottom: -66%;
+    }
+    to {
+        bottom: 0;
+    }
+}
+
+.info {
+    z-index: 33;
+    background-color: #212529e8;
+    height: 66%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+    cursor: pointer;
+    max-width: 100%;
+    animation: slideIn 0.5s ease forwards; /* Applica l'animazione all'elemento */
+}
+
+/* Aggiungi questa regola per gestire l'elemento nascosto */
+.info.hidden {
+    display: none;
+}
+
+
+@media screen and (max-width: 1200px) {
+    .slick-arrow {
+        display: none !important;
+    }
+    
+}

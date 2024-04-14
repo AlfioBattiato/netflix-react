@@ -1,19 +1,24 @@
 import React, { Component } from "react";
-import Row from "react-bootstrap/Row";
+import { Row } from 'react-bootstrap';
 import MyCard from "./MyCard";
 import MySpinner from "./MySpinner";
+import Slider from "react-slick";
 
 class ContainerCards extends Component {
+  // 
+
   state = {
     allHarry: [],
     allLove: [],
     allLord: [],
     allSearch: [],
+    cartoons: [],
     spinner: true,
     spinner2: false,
   };
 
   getFetch = (nome, parametro) => {
+
     fetch(`https://www.omdbapi.com/?apikey=96932c7f&s=${nome}`)
       .then((response) => {
         if (response.ok) {
@@ -39,6 +44,7 @@ class ContainerCards extends Component {
     this.getFetch("harry", "allHarry");
     this.getFetch("marvel", "allLove");
     this.getFetch("dune", "allLord");
+    this.getFetch("cartoons", "cartoons");
   }
 
   componentDidUpdate(prevProps) {
@@ -57,15 +63,46 @@ class ContainerCards extends Component {
 
   render() {
     // creo questi parametri per non richiamarmi  più volte i dati con this.state
-    const { spinner, allHarry, allLove, allLord, allSearch, spinner2 } =
+    const { spinner, allHarry, allLove, allLord, allSearch, spinner2 ,cartoons} =
       this.state;
-  
+    const settings = {
+      className: "center setting",
+      infinite: true,
+      centerPadding: "60px",
+      slidesToShow: 6,
+      swipeToSlide: true,
+      slidesToScroll: 1,
+      autoplay: true,
+      speed: 1000,
+      autoplaySpeed: 9000,
+      cssEase: "linear",
+      responsive: [
+        {
+          breakpoint: 700,
+          settings: {
+            slidesToShow: 2,
+          }
+        },
+        {
+          breakpoint: 1000,
+          settings: {
+            slidesToShow: 4,
+          }
+        }
+      ],
+      afterChange: function (index) {
+        console.log(
+          `Slider Changed to: ${index + 1}, background: #222; color: #bada55`
+        );
+      }
+    };
+
 
     return (
       <div className="container-xxxl">
         {/* Campo di ricerca */}
         {spinner2 && (
-          
+
           <div>
 
             <h3 className="pt-5">Sto cercando:</h3>
@@ -89,9 +126,13 @@ class ContainerCards extends Component {
           <div>
             <Row className="gx-3 gy-2">
               <h3 className="pt-5">Risultati ricerca:</h3>
-              {allSearch.slice(0, 6).map((film) => (
-                <MyCard image={film.Poster} key={film.imdbID} id={film.imdbID} />
-              ))}
+              <div className="slider-container">
+                <Slider {...settings}>
+                  {allSearch.map((film) => (
+                    <MyCard  image={film.Poster} key={film.imdbID} id={film.imdbID} />
+                  ))}
+                </Slider>
+              </div>
             </Row>
           </div>
         )}
@@ -100,27 +141,51 @@ class ContainerCards extends Component {
         <h3 className="pt-5">Trending Now</h3>
         <Row className="gx-3 gy-2">
           {spinner && <MySpinner />}
-          {allHarry.slice(0, 6).map((film) => (
-            <MyCard image={film.Poster} key={film.imdbID} id={film.imdbID} />
-          ))}
+          <div className="slider-container ">
+            <Slider {...settings}>
+              {allHarry.map((film) => (
+                <MyCard   image={film.Poster} key={film.imdbID} id={film.imdbID} />
+              ))}
+            </Slider>
+          </div>
         </Row>
+
 
         {/* Watch it Again */}
         <h3 className="pt-5">Watch it Again</h3>
         <Row className="gx-3 gy-2">
           {spinner && <MySpinner />}
-          {allLove.slice(0, 6).map((film) => (
-            <MyCard image={film.Poster} key={film.imdbID} id={film.imdbID} />
-          ))}
+          <div className="slider-container">
+            <Slider {...settings}>
+              {allLove.map((film) => (
+                <MyCard   image={film.Poster} key={film.imdbID} id={film.imdbID} />
+              ))}
+            </Slider>
+          </div>
         </Row>
-
+        {/* cartoon*/}
+        <h3 className="pt-5">Cartoons</h3>
+        <Row className="gx-3 gy-2">
+          {spinner && <MySpinner />}
+          <div className="slider-container">
+            <Slider {...settings}>
+              {cartoons.map((film) => (
+                <MyCard   image={film.Poster} key={film.imdbID} id={film.imdbID} />
+              ))}
+            </Slider>
+          </div>
+        </Row>
         {/* New Releases */}
         <h3 className="pt-5">New Releases</h3>
         <Row className="gx-3 gy-2">
           {spinner && <MySpinner />}
-          {allLord.slice(0, 6).map((film) => (
-            <MyCard image={film.Poster} key={film.imdbID} id={film.imdbID}  />
-          ))}
+          <div className="slider-container">
+            <Slider {...settings}>
+              {allLord.map((film) => (
+                <MyCard   image={film.Poster} key={film.imdbID} id={film.imdbID} />
+              ))}
+            </Slider>
+          </div>
         </Row>
       </div>
     );

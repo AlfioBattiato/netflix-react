@@ -74,11 +74,11 @@ function MyNavbar(props) {
             <Form.Control
               type="search"
               placeholder="Search"
-              className="me-2"
+              className="me-2 rounded-pill"
               aria-label="Search"
               id="input"
             />
-            <Button variant="outline-dark" type="submit">
+            <Button variant="outline-dark border-0" type="submit">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="25"
