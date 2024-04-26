@@ -1,35 +1,18 @@
 import React, { useState, useEffect } from 'react';
+import { Button } from 'react-bootstrap';
 import Col from 'react-bootstrap/Col';
 import { useNavigate } from "react-router-dom";
 
 const MyCard = (props) => {
-    const [singleMovie, setSingleMovie] = useState({});
     const [show, setShow] = useState('d-none scale');
     const [scale, setScale] = useState('');
     const navigate = useNavigate();
 
-    // Effettua la chiamata API per ottenere i dettagli del singolo film
-    const getFetch = () => {
-        fetch(`http://www.omdbapi.com/?apikey=96932c7f&i=${props.id}`)
-            .then((response) => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error("Problema nella chiamata API");
-                }
-            })
-            .then((data) => {
-                setSingleMovie(data);
-            })
-            .catch((error) => {
-                console.log("ERRORE", error);
-            });
-    };
 
 
-    useEffect(() => {
-        getFetch()
-    }, [props.id]);
+
+
+
 
     // Funzione per calcolare il colore dei cerchi in base al rating
     const getCircleColor = (rating, index) => {
@@ -40,9 +23,9 @@ const MyCard = (props) => {
         if (index < maxCircles) {
             // Se la parte decimale del rating è 0.5 e l'indice corrisponde all'ultimo cerchio, coloriamo la metà del cerchio di verde
             if (index === Math.floor(maxCircles) && rating % 2 === 0.5) {
-                return "green";
+                return "red";
             } else {
-                return "green";
+                return "red";
             }
         }
         // Altrimenti, colora il cerchio di grigio
@@ -53,40 +36,38 @@ const MyCard = (props) => {
 
 
     return (
-        <Col className="col-6 col-md-4 col-lg 2 col-xl-2 position-relative " style={{ height: "20rem", width: "97%" }} 
-         onMouseEnter={() => {setShow('') ;setScale('scale')}}
-        onMouseLeave={() => {setShow('d-none');setScale('')}}>
+        <Col className="col-6 col-md-4 col-lg 2 col-xl-2 position-relative " style={{ height: "20rem", width: "96%" }}
+            onMouseEnter={() => { setShow(''); setScale('scale') }}
+            onMouseLeave={() => { setShow('d-none'); setScale('') }}>
             <img
-            className={`${scale}`}
-                src={props.image.replace("300", '1920')}
+                className={`${scale}`}
+                src={`https://image.tmdb.org/t/p/original/${props.film.backdrop_path}`}
                 alt="img"
                 width="100%"
                 style={{ objectFit: "cover", height: "100%" }}
-                onClick={() => { navigate("/Detail/" + props.id) }}
+
             />
+
             <div className={`info p-4 d-flex flex-column justify-content-between ${show} ${scale}`}
-                            onClick={() => { navigate("/Detail/" + props.id) }}
-                            >
-                <h6 className='fw-bold py-2 '>{singleMovie.Title}</h6>
-                <div>
-                    <p className='fw-semibold mb-0' style={{ color: "green" }}>imdbVotes: {singleMovie.imdbVotes}</p>
-                    <p className='fst-italic mb-1'>Rate:</p>
+
+            >
+                <h6 className='fw-bold py-2 bebas2 '>{props.film.title}</h6>
+                <div >
+                    <p className='fw-semibold mb-0' style={{ color: "green" }}>imdbVotes: {props.film.vote_average}</p>
+                    <p className='fst-italic mb-1'>Rate:{props.film.vote_average}</p>
                     <div>
                         {[...Array(5)].map((_, index) => (
-                            <div
-                                key={index}
-                                style={{
-                                    display: "inline-block",
-                                    margin: "0 5px",
-                                    width: "22px",
-                                    height: "22px",
-                                    borderRadius: "50%",
-                                    border: "2px solid white",
-                                    backgroundColor: getCircleColor(singleMovie.imdbRating, index),
-                                }}
-                            ></div>
+                            <svg key={index} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill={getCircleColor(props.film.vote_average, index)} className="bi bi-star-fill me-1" viewBox="0 0 16 16">
+                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927
+                             0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                            </svg>
+
                         ))}
                     </div>
+
+                    <Button className='mt-2 ' variant="light" size="lg" onClick={() => { navigate(`/Detail/${props.film.id}`) }}>Info </Button>
+
+
                 </div>
             </div>
         </Col>

@@ -1,11 +1,13 @@
-import Button from "react-bootstrap/Button";
-import Container from "react-bootstrap/Container";
-import Form from "react-bootstrap/Form";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import Dropdown from "react-bootstrap/Dropdown";
 import { Link, useLocation } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import {
+  Navbar,
+  Container,
+  Nav,
+  Form,
+  Button,
+  Dropdown,
+} from "react-bootstrap";
 
 function MyNavbar(props) {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -27,35 +29,30 @@ function MyNavbar(props) {
   }, []);
 
   const location = useLocation();
+
   return (
     <Navbar
       fixed={location.pathname === "/" ? "top" : ""}
       expand="lg"
-      className={
-        isScrolled
-          ? "w-100 bg-black  navbar-scrolled"
-          : "w-100 dk navbar-scrolled"
-      }
+      className={`w-100 dk navbar-scrolled ${isScrolled && "navbar-scrolled dk2"}`}
     >
       <Container fluid>
-        <img src="assets/netflix_logo.png" alt="logo" width={"120rem"}></img>
+        <img src="assets/netflix_logo.png" alt="logo" width="120rem" />
 
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav className="me-auto my-2 my-lg-0" navbarScroll>
             <Link
               to={"/"}
-              className={
-                location.pathname === "/" ? "nav-link active" : "nav-link"
-              }
+              className={`nav-link ${location.pathname === "/" && "active"}`}
             >
               Home
             </Link>
             <Link
               to={"/Tvshow"}
-              className={
-                location.pathname === "/Tvshow" ? "nav-link active" : "nav-link"
-              }
+              className={`nav-link ${
+                location.pathname === "/Tvshow" && "active"
+              }`}
             >
               Tvshow
             </Link>

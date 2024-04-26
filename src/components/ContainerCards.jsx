@@ -5,21 +5,17 @@ import MySpinner from "./MySpinner";
 import Slider from "react-slick";
 
 class ContainerCards extends Component {
-  // 
-
   state = {
-    allHarry: [],
-    allLove: [],
-    allLord: [],
+    treding: [],
+    popular: [],
+    toprated: [],
     allSearch: [],
-    cartoons: [],
     spinner: true,
     spinner2: false,
   };
 
   getFetch = (nome, parametro) => {
-
-    fetch(`https://www.omdbapi.com/?apikey=96932c7f&s=${nome}`)
+    fetch(`https://api.themoviedb.org/3/${nome}?api_key=fe4cdf06ddd3985087ca7bae07a4bddb`)
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -28,12 +24,11 @@ class ContainerCards extends Component {
         }
       })
       .then((obj) => {
-        this.setState({ [parametro]: obj.Search });
-        this.setState({ spinner: false });
-        // creo questa condizione per nascondere il  caricamento del loader se non ci sono risultati della ricerca
-        if (obj.Search && obj.Search.length > 0) {
-          this.setState({ spinner2: false });
-        }
+        this.setState(prevState => ({
+          [parametro]: obj.results,
+          spinner: parametro === "treding" ? false : prevState.spinner,
+          spinner2: parametro === "allSearch" ? false : prevState.spinner2
+        }));
       })
       .catch((error) => {
         console.log("ERRORE", error);
@@ -41,30 +36,44 @@ class ContainerCards extends Component {
   };
 
   componentDidMount() {
-    this.getFetch("harry", "allHarry");
-    this.getFetch("marvel", "allLove");
-    this.getFetch("dune", "allLord");
-    this.getFetch("cartoons", "cartoons");
+    this.getFetch("movie/upcoming", "treding");
+    this.getFetch("movie/top_rated", "toprated");
+    this.getFetch("movie/popular", "popular");
   }
 
   componentDidUpdate(prevProps) {
-    // verifico  se ci sono cambiamenti nella props
     if (this.props.object !== prevProps.object) {
       if (this.props.object === "") {
-        // questo controllo lo faccio se il campo di ricerca è vuoto
         this.setState({ spinner2: false, allSearch: [] });
       } else {
-        // altrimenti richiamo la funzione per cercare il film e nel frattempo avvio il mio spinner
         this.setState({ spinner2: true });
         this.getFetch(this.props.object, "allSearch");
       }
     }
   }
 
-  render() {
-    // creo questi parametri per non richiamarmi  più volte i dati con this.state
-    const { spinner, allHarry, allLove, allLord, allSearch, spinner2 ,cartoons} =
-      this.state;
+  renderSpinner = () => {
+    const { spinner2 } = this.state;
+    return spinner2 && (
+      <div>
+        <h3 className="pt-5">Sto cercando:</h3>
+        <p>
+          <i>
+            "Stiamo cercando il film che hai inserito. Ti preghiamo di
+            attendere mentre analizziamo il nostro vasto database. Ti
+            invitiamo a scrivere il nome del film in modo più accurato
+            possibile per ottenere risultati più precisi. Grazie per la tua
+            collaborazione e pazienza!"
+          </i>
+        </p>
+        <Row className="gx-1 gy-1">
+          <MySpinner />
+        </Row>
+      </div>
+    );
+  };
+
+  renderMovies = (movies) => {
     const settings = {
       className: "center setting",
       infinite: true,
@@ -72,120 +81,56 @@ class ContainerCards extends Component {
       slidesToShow: 6,
       swipeToSlide: true,
       slidesToScroll: 1,
-      autoplay: true,
-      speed: 1000,
-      autoplaySpeed: 9000,
+      autoplay: false,
+      speed: 500,
+      autoplaySpeed: 6000,
       cssEase: "linear",
       responsive: [
         {
           breakpoint: 700,
-          settings: {
-            slidesToShow: 2,
-          }
+          settings: { slidesToShow: 2 }
         },
         {
           breakpoint: 1000,
-          settings: {
-            slidesToShow: 4,
-          }
+          settings: { slidesToShow: 4 }
         }
       ],
-      afterChange: function (index) {
-        console.log(
-          `Slider Changed to: ${index + 1}, background: #222; color: #bada55`
-        );
-      }
     };
 
+    return (
+      <div className="slider-container">
+        <Slider {...settings}>
+          {movies.map((film) => (
+            <MyCard key={film.id} film={film} />
+          ))}
+        </Slider>
+      </div>
+    );
+  };
+
+  render() {
+    const { spinner, treding, toprated, popular } = this.state;
 
     return (
       <div className="container-xxxl">
-        {/* Campo di ricerca */}
-        {spinner2 && (
+        {this.renderSpinner()}
 
-          <div>
-
-            <h3 className="pt-5">Sto cercando:</h3>
-            <p>
-              <i>
-                "Stiamo cercando il film che hai inserito. Ti preghiamo di
-                attendere mentre analizziamo il nostro vasto database. Ti
-                invitiamo a scrivere il nome del film in modo più accurato
-                possibile per ottenere risultati più precisi. Grazie per la tua
-                collaborazione e pazienza!"
-              </i>
-            </p>
-            <Row className="gx-1 gy-1">
-              <MySpinner />
-            </Row>
-          </div>
-        )}
-
-        {/* Risultati ricerca */}
-        {allSearch && allSearch.length > 0 && (
-          <div>
-            <Row className="gx-3 gy-2">
-              <h3 className="pt-5">Risultati ricerca:</h3>
-              <div className="slider-container">
-                <Slider {...settings}>
-                  {allSearch.map((film) => (
-                    <MyCard  image={film.Poster} key={film.imdbID} id={film.imdbID} />
-                  ))}
-                </Slider>
-              </div>
-            </Row>
-          </div>
-        )}
-
-        {/* Trending Now */}
-        <h3 className="pt-5">Trending Now</h3>
-        <Row className="gx-3 gy-2">
+        <h3 className="pt-5">Upcoming Movies</h3>
+        <Row className="gx-5 gy-2">
           {spinner && <MySpinner />}
-          <div className="slider-container ">
-            <Slider {...settings}>
-              {allHarry.map((film) => (
-                <MyCard   image={film.Poster} key={film.imdbID} id={film.imdbID} />
-              ))}
-            </Slider>
-          </div>
+          {this.renderMovies(treding)}
         </Row>
 
+        <h3 className="pt-5">Popular</h3>
+        <Row className="gx-5 gy-2">
+          {spinner && <MySpinner />}
+          {this.renderMovies(popular)}
+        </Row>
 
-        {/* Watch it Again */}
-        <h3 className="pt-5">Watch it Again</h3>
-        <Row className="gx-3 gy-2">
+        <h3 className="pt-5">Top rated</h3>
+        <Row className="gx-5 gy-2">
           {spinner && <MySpinner />}
-          <div className="slider-container">
-            <Slider {...settings}>
-              {allLove.map((film) => (
-                <MyCard   image={film.Poster} key={film.imdbID} id={film.imdbID} />
-              ))}
-            </Slider>
-          </div>
-        </Row>
-        {/* cartoon*/}
-        <h3 className="pt-5">Cartoons</h3>
-        <Row className="gx-3 gy-2">
-          {spinner && <MySpinner />}
-          <div className="slider-container">
-            <Slider {...settings}>
-              {cartoons.map((film) => (
-                <MyCard   image={film.Poster} key={film.imdbID} id={film.imdbID} />
-              ))}
-            </Slider>
-          </div>
-        </Row>
-        {/* New Releases */}
-        <h3 className="pt-5">New Releases</h3>
-        <Row className="gx-3 gy-2">
-          {spinner && <MySpinner />}
-          <div className="slider-container">
-            <Slider {...settings}>
-              {allLord.map((film) => (
-                <MyCard   image={film.Poster} key={film.imdbID} id={film.imdbID} />
-              ))}
-            </Slider>
-          </div>
+          {this.renderMovies(toprated)}
         </Row>
       </div>
     );

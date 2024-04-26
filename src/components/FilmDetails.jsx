@@ -3,93 +3,84 @@ import { Col, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 
 function FilmDetails() {
-  const [singleMovie, setSingleMovie] = useState({});
-  const [immagine4k, setmmagine4k] = useState({});
+const[details,setDetails]=useState([]);
   const [urlvideo, setUrlvideo] = useState("");
   const params = useParams();
-  const url = "https://www.youtube.com/embed/j9OAEJI5Rww";
 
   const getFetch = () => {
-    fetch(`http://www.omdbapi.com/?apikey=96932c7f&i=${params.filmId}`)
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("Problema nella chiamata API");
+    const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmZTRjZGYwNmRkZDM5ODUwODdjYTdiYWUwN2E0YmRkYiIsInN1YiI6IjY2MmE3OGIyNTBmN2NhMDBiM2M4OWIyOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.8BNyjqt4a_3nsuG_PYooEZY1naVTuU-434lKKDlFw6E'
+      }
+    };
+    
+    fetch(`https://api.themoviedb.org/3/movie/${params.filmId}/videos?language=en-US`, options)
+      .then(response => response.json())
+      .then((response) => 
+    {
+      const officialTrailer = response.results.find(video => video.name === "Official Trailer");
+      const officialTrailer2 = response.results.find(video => video.name === "Trailer");
+      if (officialTrailer) {
+        // Se trovi il trailer ufficiale, imposta setUrlvideo con il suo key
+        setUrlvideo(officialTrailer.key)}else{
+          setUrlvideo(officialTrailer2.key)
         }
-      })
-      .then((data) => {
-        console.log(data);
-        setSingleMovie(data);
-        const replaceNumberInString = data.Poster.replace("300", "1920");
-        setmmagine4k(replaceNumberInString);
-      })
-      .catch((error) => {
-        console.log("ERRORE", error);
-      });
+    })
+      .catch(err => console.error(err));
   };
-  const getVideo = () => {
-    fetch(`https://api.kinocheck.de/movies?imdb_id=${params.filmId}`)
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("Problema nella chiamata API");
-        }
-      })
-      .then((data) => {
-        if (data.trailer !== null) {
-          setUrlvideo(
-            "https://www.youtube.com/embed/" + data.trailer.youtube_video_id
-          );
-        }
-      })
-      .catch((error) => {
-        console.log("ERRORE", error);
-      });
-  };
-
+  
+  const getDetails=()=>{
+    const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmZTRjZGYwNmRkZDM5ODUwODdjYTdiYWUwN2E0YmRkYiIsInN1YiI6IjY2MmE3OGIyNTBmN2NhMDBiM2M4OWIyOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.8BNyjqt4a_3nsuG_PYooEZY1naVTuU-434lKKDlFw6E'
+      }
+    };
+    
+    fetch(`https://api.themoviedb.org/3/movie/${params.filmId}?language=en-US`, options)
+      .then(response => response.json())
+      .then((response) =>{
+        setDetails(response)
+        console.log(response)})
+      .catch(err => console.error(err));
+  }
   useEffect(() => {
     getFetch();
-    getVideo();
-    console.log(urlvideo);
-  }, []);
+    getDetails();
+  }, [params]);
 
   return (
     <div className="container-xxxl">
       {urlvideo === "" ? (
-        <h2 className=" pb-5 display-5 " style={{ color: "red" }}><i>Nessun trailer disponibile :(</i></h2>
+        <h2 className=" pb-5 display-5 " style={{ color: "red" }}><i>Nessun trailer disponibile :</i></h2>
       ) : (
-        <div id="youtube-video-container" className="pb-5">
-          <h2>Trailer</h2>
-          <iframe
-            width="100%"
-            height="515"
-            src={urlvideo}
-            allowFullScreen="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          ></iframe>
-        </div>
+        <div id="video-container">
+        <iframe width="100%" height="545" src={`https://www.youtube.com/embed/${urlvideo}`} frameBorder="0" allowFullScreen></iframe>
+      </div>
       )}
       <Row>
         <Col xs={12} md={3} className="pb-3">
           <img
-            src={immagine4k}
-            alt="img"
+                src={`https://image.tmdb.org/t/p/original/${details.backdrop_path}`}
+                alt="img"
             width="100%"
             style={{ objectFit: "cover", height: "100%" }}
           ></img>
         </Col>
         <Col xs={12} md={8}>
-          <h1>{singleMovie.Title}</h1>
-          <p className="fst-italic mb-1">Language: {singleMovie.Language}</p>
-          <p className="fst-italic mb-1">Duration: {singleMovie.Runtime}</p>
-          <p className="fst-italic mb-1">Released : {singleMovie.Released}</p>
-          <p className="fst-italic mb-1">Awards : {singleMovie.Awards}</p>
-          <p className="fst-italic mb-1">Writer : {singleMovie.Writer}</p>
-          <p className="fst-italic mb-1">Director : {singleMovie.Director}</p>
-          <p className="fst-italic mb-1">Genre : {singleMovie.Genre}</p>
-          <p className="fst-italic mb-1">imdbRating : {singleMovie.imdbRating}</p>
-          <p className="fst-italic mb-1">Plot : {singleMovie.Plot}</p>
+          <h1>{details.Title}</h1>
+          <p className="fst-italic mb-1">Language: {details.Language}</p>
+          <p className="fst-italic mb-1">Duration: {details.Runtime}</p>
+          <p className="fst-italic mb-1">Released : {details.Released}</p>
+          <p className="fst-italic mb-1">Awards : {details.Awards}</p>
+          <p className="fst-italic mb-1">Writer : {details.Writer}</p>
+          <p className="fst-italic mb-1">Director : {details.Director}</p>
+          <p className="fst-italic mb-1">Genre : {details.Genre}</p>
+          <p className="fst-italic mb-1">imdbRating : {details.imdbRating}</p>
+          <p className="fst-italic mb-1">Plot : {details.Plot}</p>
           <div className="d-flex align-items-center gap-2 mt-5">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-plus-circle " viewBox="0 0 16 16">
               <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
