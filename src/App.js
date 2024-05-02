@@ -10,28 +10,28 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import FilmDetails from "./components/FilmDetails";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import RisultatoRicerca from "./components/RisultatoRicerca";
 
 function App() {
-  const [Ricerca, setRicerca] = useState("");
 
   return (
     <BrowserRouter>
       <div>
-        <MyNavbar updateRicerca={setRicerca}></MyNavbar>
-
+        <MyNavbar></MyNavbar>
         <Routes>
           <Route
             path="/"
             element={
               <>
                 <MyHeader></MyHeader>
-                <ContainerCards object={Ricerca}></ContainerCards>
+                <ContainerCards></ContainerCards>
               </>
             }
           ></Route>
 
           <Route path="/Tvshow" element={<Tvshow></Tvshow>} />
           <Route path="/Detail/:filmId" element={<FilmDetails></FilmDetails>} />
+          <Route path="/search" element={<RisultatoRicerca></RisultatoRicerca>} />
 
         </Routes>
 

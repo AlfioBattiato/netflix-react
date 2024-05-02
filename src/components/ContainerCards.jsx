@@ -1,140 +1,121 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { Row } from 'react-bootstrap';
 import MyCard from "./MyCard";
 import MySpinner from "./MySpinner";
 import Slider from "react-slick";
+import { useDispatch, useSelector } from 'react-redux';
+import { getFetch } from "../redux/actions";
 
-class ContainerCards extends Component {
-  state = {
-    treding: [],
-    popular: [],
-    toprated: [],
-    allSearch: [],
-    spinner: true,
-    spinner2: false,
-  };
+const ContainerCards = () => {
+  const [spinner, setSpinner] = useState(true);
 
-  getFetch = (nome, parametro) => {
-    fetch(`https://api.themoviedb.org/3/${nome}?api_key=fe4cdf06ddd3985087ca7bae07a4bddb`)
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("Problema nella chiamata API");
-        }
-      })
-      .then((obj) => {
-        this.setState(prevState => ({
-          [parametro]: obj.results,
-          spinner: parametro === "treding" ? false : prevState.spinner,
-          spinner2: parametro === "allSearch" ? false : prevState.spinner2
-        }));
-      })
-      .catch((error) => {
-        console.log("ERRORE", error);
-      });
-  };
+  const nowPlaying = useSelector(state => state.nowplaying);
+  const upcoming = useSelector(state => state.upcoming);
+  const topRated = useSelector(state => state.toprated);
+  const popular = useSelector(state => state.popular);
 
-  componentDidMount() {
-    this.getFetch("movie/upcoming", "treding");
-    this.getFetch("movie/top_rated", "toprated");
-    this.getFetch("movie/popular", "popular");
-  }
+  const dispatch = useDispatch();
 
-  componentDidUpdate(prevProps) {
-    if (this.props.object !== prevProps.object) {
-      if (this.props.object === "") {
-        this.setState({ spinner2: false, allSearch: [] });
-      } else {
-        this.setState({ spinner2: true });
-        this.getFetch(this.props.object, "allSearch");
-      }
+  useEffect(() => {
+    dispatch(getFetch('now_playing'));
+    dispatch(getFetch('upcoming'));
+    dispatch(getFetch('top_rated'));
+    dispatch(getFetch('popular'));
+    setSpinner(false);
+
+  }, []);
+
+
+
+  const renderMovies = (movies) => {
+    if (!movies || movies.length === 0) {
+      return null;
+    } else {
+
+      const settings = {
+        className: "center setting",
+        infinite: true,
+        centerPadding: "60px",
+        slidesToShow: 7,
+        swipeToSlide: true,
+        slidesToScroll: 1,
+        autoplay: true,
+        speed: 500,
+        autoplaySpeed: 6000,
+        cssEase: "linear",
+        responsive: [
+          {
+            breakpoint: 500,
+            settings: { slidesToShow: 2 }
+          },
+          {
+            breakpoint: 700,
+            settings: { slidesToShow: 3 }
+          },
+          {
+            breakpoint: 1200,
+            settings: { slidesToShow: 4 }
+          }
+        ],
+      };
+
+      return (
+
+        <div className="slider-container">
+          <Slider {...settings}>
+            {movies.map((film, index) => (
+              <div key={film.id} >
+                <MyCard film={film} />
+                <div>
+                  <p className='text-white  my-1'>{film.title}</p>
+                  <div className="d-flex align-items-center pe-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill='#CF9C0E' className="bi bi-star-fill me-1" viewBox="0 0 16 16">
+                      <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927
+                               0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                    </svg>
+                    <span>{film.vote_average.toFixed(1)}</span>
+                    <span className="badge text-bg-dark ms-auto">{film.release_date}</span>
+                  </div>
+                </div>
+              </div>
+
+            ))}
+          </Slider>
+
+        </div>
+      );
     }
-  }
-
-  renderSpinner = () => {
-    const { spinner2 } = this.state;
-    return spinner2 && (
-      <div>
-        <h3 className="pt-5">Sto cercando:</h3>
-        <p>
-          <i>
-            "Stiamo cercando il film che hai inserito. Ti preghiamo di
-            attendere mentre analizziamo il nostro vasto database. Ti
-            invitiamo a scrivere il nome del film in modo più accurato
-            possibile per ottenere risultati più precisi. Grazie per la tua
-            collaborazione e pazienza!"
-          </i>
-        </p>
-        <Row className="gx-1 gy-1">
-          <MySpinner />
-        </Row>
-      </div>
-    );
   };
 
-  renderMovies = (movies) => {
-    const settings = {
-      className: "center setting",
-      infinite: true,
-      centerPadding: "60px",
-      slidesToShow: 6,
-      swipeToSlide: true,
-      slidesToScroll: 1,
-      autoplay: false,
-      speed: 500,
-      autoplaySpeed: 6000,
-      cssEase: "linear",
-      responsive: [
-        {
-          breakpoint: 700,
-          settings: { slidesToShow: 2 }
-        },
-        {
-          breakpoint: 1000,
-          settings: { slidesToShow: 4 }
-        }
-      ],
-    };
+  return (
+    <div className="container-xxxl">
+    
 
-    return (
-      <div className="slider-container">
-        <Slider {...settings}>
-          {movies.map((film) => (
-            <MyCard key={film.id} film={film} />
-          ))}
-        </Slider>
-      </div>
-    );
-  };
+      <h3 className="pt-5">Upcoming Movies</h3>
+      {spinner && <MySpinner />}
+      <Row className="gx-2 gy-2">
+        {renderMovies(upcoming)}
+      </Row>
 
-  render() {
-    const { spinner, treding, toprated, popular } = this.state;
+      <h3 className="pt-5">Popular</h3>
+      {spinner && <MySpinner />}
+      <Row className="gx-2 gy-2">
+        {renderMovies(popular)}
+      </Row>
 
-    return (
-      <div className="container-xxxl">
-        {this.renderSpinner()}
-
-        <h3 className="pt-5">Upcoming Movies</h3>
-        <Row className="gx-5 gy-2">
-          {spinner && <MySpinner />}
-          {this.renderMovies(treding)}
-        </Row>
-
-        <h3 className="pt-5">Popular</h3>
-        <Row className="gx-5 gy-2">
-          {spinner && <MySpinner />}
-          {this.renderMovies(popular)}
-        </Row>
-
-        <h3 className="pt-5">Top rated</h3>
-        <Row className="gx-5 gy-2">
-          {spinner && <MySpinner />}
-          {this.renderMovies(toprated)}
-        </Row>
-      </div>
-    );
-  }
-}
+      <h3 className="pt-5">Top rated</h3>
+      {spinner && <MySpinner />}
+      <Row className="gx-2 gy-2">
+        {renderMovies(topRated)}
+      </Row>
+      <h3 className="pt-5">Now Playing</h3>
+      {spinner && <MySpinner />}
+      <Row className="gx-2 gy-2">
+        {renderMovies(nowPlaying)}
+      </Row>
+    </div>
+  );
+};
 
 export default ContainerCards;
+

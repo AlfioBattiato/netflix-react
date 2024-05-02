@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import {
   Navbar,
@@ -8,9 +8,14 @@ import {
   Button,
   Dropdown,
 } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { search } from "../redux/actions";
 
-function MyNavbar(props) {
+function MyNavbar() {
+  const dispatch=useDispatch()
   const [isScrolled, setIsScrolled] = useState(false);
+  const [parola, setParola] = useState("");
+  const navigate=useNavigate()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,12 +37,12 @@ function MyNavbar(props) {
 
   return (
     <Navbar
-      fixed={location.pathname === "/" ? "top" : ""}
+      fixed="top"
       expand="lg"
       className={`w-100 dk navbar-scrolled ${isScrolled && "navbar-scrolled dk2"}`}
     >
       <Container fluid>
-        <img src="assets/netflix_logo.png" alt="logo" width="120rem" />
+        <img src="/assets/netflix_logo.png" alt="logo" width="120rem" />
 
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
@@ -56,16 +61,17 @@ function MyNavbar(props) {
             >
               Tvshow
             </Link>
-
-            <Nav.Link href="#">Movies</Nav.Link>
-            <Nav.Link href="#">Recently Added</Nav.Link>
             <Nav.Link href="#">My List</Nav.Link>
           </Nav>
           <Form
             className="d-flex"
             onChange={(e) => {
-              e.preventDefault();
-              props.updateRicerca(e.target.value);
+              setParola(e.target.value);
+            }}
+            onSubmit={(e)=>{
+              e.preventDefault()
+              dispatch(search(parola))
+              navigate("/search")
             }}
           >
             <Form.Control

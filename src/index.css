@@ -18,8 +18,8 @@ body {
 }
 
 .multiple{
-background-color: rgb(196, 196, 196);
-background-blend-mode: multiply;
+/* background-color: rgb(196, 196, 196);
+background-blend-mode: multiply; */
 
 }
 
@@ -38,11 +38,15 @@ background-blend-mode: multiply;
   background-color: #00050da4 !important;
   border-radius: 0 !important;
 }
+
 .dk2{
   background-color: #00050d !important;
   border-bottom: 0.5px solid red;
 }
-
+.gradient{
+  background: rgb(0,5,13);
+  background: linear-gradient(0deg, rgba(0,5,13,1) 0%, rgba(0,5,13,0.9668242296918768) 13%, rgba(0,5,13,0.8995973389355743) 31%, rgba(0,5,13,0.7455357142857143) 55%, rgba(0,5,13,0.3029586834733894) 100%);
+}
 
 .scale {
   cursor: pointer;

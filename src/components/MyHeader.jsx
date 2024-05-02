@@ -2,6 +2,8 @@ import Button from "react-bootstrap/Button";
 import { useEffect, useState } from "react";
 import Carousel from "react-bootstrap/Carousel";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getFetch } from "../redux/actions";
 
 
 
@@ -10,36 +12,20 @@ function MyHeader() {
   const d2 = "M109.699,78.969c-1.876,1.067-3.035,3.059-3.035,5.216v131.674c0,3.314,2.687,6,6,6s6-2.686,6-6V94.74l88.833,52.883l-65.324,42.087c-2.785,1.795-3.589,5.508-1.794,8.293c1.796,2.786,5.508,3.59,8.294,1.794l73.465-47.333c1.746-1.125,2.786-3.073,2.749-5.15c-0.037-2.077-1.145-3.987-2.93-5.05L115.733,79.029 C113.877,77.926,111.575,77.902,109.699,78.969z";
 
 
+const dispatch=useDispatch()
+const nowplaying=useSelector(state=>state.nowplaying)
 
-  const apiKey = "fe4cdf06ddd3985087ca7bae07a4bddb";
   const [index, setIndex] = useState(0);
   const handleSelect = (selectedIndex) => {
     setIndex(selectedIndex);
   };
   const navigate = useNavigate()
 
-  const [movies, setMovies] = useState([])
 
-  const getFetch = () => {
-    fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}`)
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("Problema nella chiamata API");
-        }
-      })
-      .then((obj) => {
-        setMovies(obj.results.slice(0, 5))
-
-      })
-      .catch((error) => {
-        console.log("ERRORE", error);
-      });
-  };
   useEffect(() => {
-    getFetch();
+dispatch(getFetch("now_playing"))
   }, []);
+
   const getCircleColor = (rating, index) => {
     // Calcoliamo il numero massimo di cerchi da colorare, assumendo che il rating massimo sia 5
     const maxCircles = rating / 2;
@@ -65,13 +51,13 @@ function MyHeader() {
       <Carousel
         activeIndex={index}
         onSelect={handleSelect}
-        className="text-white multiple"
+        className="text-white "
       >
-        {movies.length > 0 && (
-          movies.map((film, index) =>
+        {nowplaying.length > 0 && (
+          nowplaying.slice(0,6).map((film, index) =>
             <Carousel.Item key={index}>
               <div
-                className="multiple carosel"
+                className=" carosel"
                 style={{
                   backgroundImage: `url(https://image.tmdb.org/t/p/original/${film.backdrop_path})`,
                   backgroundSize: "cover",
@@ -81,7 +67,11 @@ function MyHeader() {
                   display: "flex",
                   justifyContent: "center",
                 }}
-              ></div>
+              >
+                <div className="gradient w-100 h-100">
+                  
+                </div>
+              </div>
               <Carousel.Caption>
                 <div className="d-flex gap-5 align-items-center">
                   <div className="text-start">
