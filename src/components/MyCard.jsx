@@ -37,7 +37,7 @@ const MyCard = (props) => {
                 style={{ objectFit: "cover", height: "100%" }}
 
             />) : (
-                <Spinner></Spinner>
+                <p>No pictures</p>
             )}
 
             <div className={`info p-4 d-flex flex-column justify-content-between ${show} ${scale}`}
@@ -57,7 +57,10 @@ const MyCard = (props) => {
                         ))}
                     </div>
 
-                    <Button className='mt-2 btn-sm ' variant="light" size="lg" onClick={() => { navigate(`/Detail/${props.film.id}`) }}>Watch Trailer </Button>
+                    <Button className='mt-2 btn-sm ' variant="light" size="lg" onClick={() => {
+                         window.scroll(0, 0);
+                        navigate(`/Detail/${props.film.id}`);
+                    }}>Watch Trailer</Button>
 
 
                 </div>

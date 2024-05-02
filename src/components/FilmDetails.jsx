@@ -4,14 +4,21 @@ import Cast from "./Cast";
 import { useParams } from "react-router-dom";
 import Slider from "react-slick";
 import Trailer from "./Trailer";
+import { useDispatch, useSelector } from "react-redux";
+import { getFetch, getReviews, similar } from "../redux/actions";
+import Reviews from "./Reviews";
+import MyCard from "./MyCard";
 
 function FilmDetails() {
   const [details, setDetails] = useState([]);
   const [cast, setCast] = useState([]);
   const [video, setVideo] = useState([]);
   const [KeyVideo, setKeyVideo] = useState("");
+  const rew = useSelector(state => state.reviews)
+  const simili = useSelector(state => state.similar)
 
   const params = useParams();
+  const dispatch = useDispatch()
 
   const getDetails = () => {
     const options = {
@@ -25,7 +32,7 @@ function FilmDetails() {
     fetch(`https://api.themoviedb.org/3/movie/${params.filmId}/videos?language=en-US`, options)
       .then(response => response.json())
       .then((response) => {
-        console.log(response)
+        // console.log(response)
         setVideo(response.results)
 
         if (response.results.length > 0) {
@@ -42,7 +49,7 @@ function FilmDetails() {
         }
       })
       .catch(err => console.error(err));
-    //detagli
+    //dettagli
     fetch(`https://api.themoviedb.org/3/movie/${params.filmId}?language=en-US`, options)
       .then(response => response.json())
       .then((response) => {
@@ -61,15 +68,17 @@ function FilmDetails() {
   }
   useEffect(() => {
     getDetails();
+    dispatch(getReviews(params.filmId))
+    dispatch(similar(params.filmId))
   }, [params]);
 
   const getCircleColor = (rating, index) => {
     const maxCircles = rating / 2;
     if (index < maxCircles) {
       if (index === Math.floor(maxCircles) && rating % 2 === 0.5) {
-        return "red";
+        return "#CF9C0E";
       } else {
-        return "red";
+        return "#CF9C0E";
       }
     }
     else {
@@ -99,7 +108,6 @@ function FilmDetails() {
           slidesToScroll: 2
         }
       }
-      // Aggiungi altri breakpoint se necessario
     ]
   };
 
@@ -185,8 +193,24 @@ function FilmDetails() {
             <iframe width="100%" height="545" src={`https://www.youtube.com/embed/${KeyVideo}`} allowFullScreen></iframe>
           </div>
         )}
+        {/* reviews */}
+        {rew && (<Reviews ></Reviews>)}
+        <div className="container">
+          <h3 className="mt-5">Similar Movie</h3>
+          <Slider {...settings}>
+            {simili.map((e, index) => (
+              e.poster_path && (
+                <div className="" key={index}>
+                  <MyCard film={e} />
+                </div>
+              )
+            ))}
+          </Slider>
 
-      </>) : (
+        </div>
+
+      </>
+      ) : (
         <div className="spinner-border" role="status">
           <span className="visually-hidden">Loading...</span>
         </div>)}

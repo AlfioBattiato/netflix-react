@@ -1,4 +1,4 @@
-import { GET_NOWPLAYING, GET_POPULAR, GET_SEARCH, GET_TOPRATED, GET_UPCOMING } from "../actions/index";
+import { GET_NOWPLAYING, GET_POPULAR, GET_REVIEWS, GET_SEARCH, GET_SIMILAR, GET_TOPRATED, GET_UPCOMING } from "../actions/index";
 
 const initialState = {
     nowplaying: "",
@@ -6,6 +6,8 @@ const initialState = {
     toprated: "",
     popular: "",
     search: "",
+    similar: "",
+    reviews:null
   
 
 }
@@ -37,6 +39,16 @@ const dataReducer = function(state = initialState, action) {
                 return {
                     ...state,
                     search:  action.payload
+                };
+        case GET_REVIEWS:
+                return {
+                    ...state,
+                    reviews:  action.payload
+                };
+        case GET_SIMILAR:
+                return {
+                    ...state,
+                    similar:  action.payload
                 };
 
             
