@@ -17,11 +17,6 @@ body {
   margin: 0px;
 }
 
-.multiple{
-/* background-color: rgb(196, 196, 196);
-background-blend-mode: multiply; */
-
-}
 
 #input {
   background-color: rgba(0, 0, 0, 0);
@@ -35,7 +30,7 @@ background-blend-mode: multiply; */
   background-color: #333333;
 }
 .dk{
-  background-color: #00050da4 !important;
+  background-color: #00050db9 !important;
   border-radius: 0 !important;
 }
 
@@ -45,7 +40,7 @@ background-blend-mode: multiply; */
 }
 .gradient{
   background: rgb(0,5,13);
-  background: linear-gradient(0deg, rgba(0,5,13,1) 0%, rgba(0,5,13,0.9668242296918768) 13%, rgba(0,5,13,0.8995973389355743) 31%, rgba(0,5,13,0.7455357142857143) 55%, rgba(0,5,13,0.3029586834733894) 100%);
+  background: linear-gradient(0deg, rgba(0,5,13,1) 0%, rgba(0,5,13,0.9668242296918768) 13%, rgba(0, 5, 13, 0.774) 31%, rgba(0, 5, 13, 0.541) 55%, rgba(0, 5, 13, 0.007) 100%);
 }
 
 .scale {

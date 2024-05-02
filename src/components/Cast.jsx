@@ -9,11 +9,12 @@ function Cast(props) {
                 height={"100%"}
 
             />
-            <div className=" dk position-absolute " style={{width:"90%" ,height:"40%"}}>
-
+            <div className=" dk position-absolute " style={{ width: "90%", height: "40%" }}>
+                <span>Actor:</span>
                 <p> {props.name}</p>
+                <span>Role:</span>
                 <p className="text-danger"  >{props.character}</p>
-                
+
             </div>
         </div>
     )

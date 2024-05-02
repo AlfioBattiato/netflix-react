@@ -160,7 +160,7 @@ function FilmDetails() {
               </Row>
             </div>
 
-            {cast.lenght > 0 && (
+            {cast.length > 0 && (
               <div className="container">
                 <h3 >Top Cast</h3>
                 <Slider {...settings}>
