@@ -194,10 +194,10 @@ function FilmDetails() {
           </div>
         )}
         {/* reviews */}
-        {rew && (<Reviews ></Reviews>)}
         <div className="container">
+        {rew && (<Reviews ></Reviews>)}
           <h3 className="mt-5">Similar Movie</h3>
-          <Slider {...settings}>
+          {/* <Slider {...settings}>
             {simili.map((e, index) => (
               e.poster_path && (
                 <div className="" key={index}>
@@ -205,7 +205,7 @@ function FilmDetails() {
                 </div>
               )
             ))}
-          </Slider>
+          </Slider> */}
 
         </div>
 
