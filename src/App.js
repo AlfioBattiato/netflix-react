@@ -29,8 +29,8 @@ function App() {
             }
           ></Route>
 
-          <Route path="/Tvshow" element={<Tvshow></Tvshow>} />
-          <Route path="/Detail/:filmId" element={<FilmDetails></FilmDetails>} />
+          <Route path="/Tvshow" element={<><MyHeader></MyHeader><Tvshow></Tvshow></>} />
+          <Route path="/Detail/:type/:id" element={<FilmDetails></FilmDetails>} />
           <Route path="/search" element={<RisultatoRicerca></RisultatoRicerca>} />
 
         </Routes>

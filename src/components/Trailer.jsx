@@ -18,7 +18,7 @@ function Trailer(props) {
         <div className="dropdown  ">
           {props.video.map((film,index ) => (
 
-            <li key={index} className="bg-black p-1" onClick={()=>props.funzione(film.key)}>{film.name}</li>
+            <li key={index} className="bg-black p-1 otherVideos" onClick={()=>props.funzione(film.key)}>{film.name}</li>
 
           ))}
         </div>

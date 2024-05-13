@@ -11,6 +11,7 @@ function Reviews() {
 
     const [number, setNumber] = useState(4)
     const [number2, setNumber2] = useState(0)
+    const [sendRate, setSendRate] = useState(false)
 
 
 
@@ -22,7 +23,7 @@ function Reviews() {
     };
 
 
-    const user = "Alfio"
+    const user = "Guess"
     const [commento, setCommento] = useState({
         value: 1,
 
@@ -74,7 +75,10 @@ function Reviews() {
                                 </div>
 
                             ))}
-                            <Button variant="outline-light" className="mt-2 w-100" onClick={() => setNumber(number + 4)}> <i className="bi bi-chevron-compact-down"></i></Button>
+                            {reviews.length > 4 && (
+                                <Button variant="outline-light" className="mt-2 w-100" onClick={() => setNumber(number + 4)}> <i className="bi bi-chevron-compact-down"></i></Button>
+
+                            )}
                         </>
                     ) : (<p> 0 Reviews</p>)}
                 </div>
@@ -100,16 +104,28 @@ function Reviews() {
                              0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
                         </svg>
                     ))}
-                    <form onSubmit={(e) => {
-                        e.preventDefault();
-                        const btn = document.getElementById("submitform")
-                        btn.disabled = true
-                        dispatch(postReviews(params.filmId, commento))
-                        console.log(commento)
-                    }}>
+                    <form
 
-                        <Button variant="outline-light" type="submit" id="submitform" className="mt-2">Submit</Button>
+                        onSubmit={(e) => {
+                            const btn = document.getElementById("submitform");
+                            e.preventDefault();
+                            btn.disabled = true;
+                            dispatch(postReviews(params.filmId, commento));
+                            console.log(commento);
+                            setSendRate(true)
 
+                        }}
+                    >
+                        <div className="position-relative" style={{ width: "100%", height: "40px" }}>
+                            {sendRate &&
+                                (
+                                    <p className="text-success" id="pRating">Rating sent successfully</p>
+                                )
+                            }
+                        </div>
+                        <Button variant="outline-success" type="submit" id="submitform" className="mt-2">
+                            Submit
+                        </Button>
                     </form>
 
 

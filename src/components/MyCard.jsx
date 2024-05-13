@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Spinner } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Button } from 'react-bootstrap';
 import Col from 'react-bootstrap/Col';
 import { useNavigate } from "react-router-dom";
 
@@ -13,9 +13,9 @@ const MyCard = (props) => {
         const maxCircles = rating / 2;
         if (index < maxCircles) {
             if (index === Math.floor(maxCircles) && rating % 2 === 0.5) {
-                return "red";
+                return "#CF9C0E";
             } else {
-                return "red";
+                return "#CF9C0E";
             }
         }
         else {
@@ -26,11 +26,11 @@ const MyCard = (props) => {
 
 
     return (
-        <Col className="col-6 col-md-4 col-lg 2 col-xl-2 position-relative " style={{ height: "20rem", width: "96%" }}
+        <Col className="col-6 col-md-4 col-lg 2 col-xl-2 position-relative  " style={{ height: "20rem", width: "96%" }}
             onMouseEnter={() => { setShow(''); setScale('scale') }}
             onMouseLeave={() => { setShow('d-none'); setScale('') }}>
             {props.film.poster_path ? (<img
-                className={`${scale}`}
+                className={`${scale} rounded`}
                 src={`https://image.tmdb.org/t/p/original/${props.film.poster_path}`}
                 alt="img"
                 width="100%"
@@ -40,13 +40,11 @@ const MyCard = (props) => {
                 <p>No pictures</p>
             )}
 
-            <div className={`info p-4 d-flex flex-column justify-content-between ${show} ${scale}`}
-
-            >
-                <h6 className='fw-bold py-2 bebas2 '>{props.film.title}</h6>
+            <div className={`info p-4 d-flex flex-column justify-content-between ${show} ${scale} rounded`} >
+                <h6 className='fw-bold py-2 bebas2 '>{props.film.title ? props.film.title : props.film.original_name}</h6>
                 <div >
                     <p className='fw-semibold mb-0' style={{ color: "green" }}>imdbVotes: {props.film.vote_average}</p>
-                    <p className='fst-italic mb-1'>Rate:{props.film.vote_average.toFixed(1)}</p>
+                    <p className='fst-italic text-white mb-1'>Rate:{props.film.vote_average.toFixed(1)}</p>
                     <div>
                         {[...Array(5)].map((_, index) => (
                             <svg key={index} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill={getCircleColor(props.film.vote_average, index)} className="bi bi-star-fill me-1" viewBox="0 0 16 16">
@@ -57,10 +55,19 @@ const MyCard = (props) => {
                         ))}
                     </div>
 
-                    <Button className='mt-2 btn-sm ' variant="light" size="lg" onClick={() => {
-                         window.scroll(0, 0);
-                        navigate(`/Detail/${props.film.id}`);
-                    }}>Watch Trailer</Button>
+                    <Button
+                        className='mt-2 btn-sm '
+                        variant="light"
+                        size="lg"
+                        onClick={() => {
+                            window.scroll(0, 0);
+                            const { id } = props.film;
+                            const url = `/Detail/${props.film.original_name ? 'tv/' + id : 'movie/' + id}`;
+                            navigate(url);
+                        }}
+                    >
+                        Watch Trailer
+                    </Button>
 
 
                 </div>

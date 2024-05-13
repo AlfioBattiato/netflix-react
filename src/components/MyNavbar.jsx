@@ -50,6 +50,7 @@ function MyNavbar() {
             <Link
               to={"/"}
               className={`nav-link ${location.pathname === "/" && "active"}`}
+              onClick={()=> window.scroll(0, 0)}
             >
               Home
             </Link>
@@ -58,6 +59,7 @@ function MyNavbar() {
               className={`nav-link ${
                 location.pathname === "/Tvshow" && "active"
               }`}
+              onClick={()=> window.scroll(0, 0)}
             >
               Tvshow
             </Link>
