@@ -115,7 +115,7 @@ function MyNavbar() {
               KIDS
             </Nav.Link>
             <Nav.Link href="#" className="ps-3  fw-bold text-white">
-              <img src="assets/avatar.png" width="37rem" alt="" />
+              <img src="/assets/avatar.png" width="37rem" alt="" />
             </Nav.Link>
             {/*--------------------------------------------------------------- freccia dropdown */}
             <Dropdown align="end">

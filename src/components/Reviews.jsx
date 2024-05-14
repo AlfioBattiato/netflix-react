@@ -7,7 +7,8 @@ import { useParams } from "react-router-dom";
 function Reviews() {
     const reviews = useSelector(state => state.reviews)
     const dispatch = useDispatch()
-    const params = useParams();
+    
+    const { type, id } = useParams();
 
     const [number, setNumber] = useState(4)
     const [number2, setNumber2] = useState(0)
@@ -110,7 +111,7 @@ function Reviews() {
                             const btn = document.getElementById("submitform");
                             e.preventDefault();
                             btn.disabled = true;
-                            dispatch(postReviews(params.filmId, commento));
+                            dispatch(postReviews(id, commento));
                             console.log(commento);
                             setSendRate(true)
 

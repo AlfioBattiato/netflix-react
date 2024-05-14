@@ -159,7 +159,7 @@ body {
 }
 
 .dk {
-    background-color: #00050dd8 !important;
+    background-color: #00050d6e !important;
     border-radius: 0 !important;
 
 }
@@ -171,7 +171,7 @@ body {
 
 .gradient {
     background: rgb(0, 5, 13);
-    background: linear-gradient(0deg, rgba(0, 5, 13, 1) 0%, rgba(0, 5, 13, 0.9668242296918768) 13%, rgba(0, 5, 13, 0.774) 31%, rgba(0, 5, 13, 0.541) 55%, rgba(0, 5, 13, 0.007) 100%);
+    background: linear-gradient(0deg, rgba(0, 5, 13, 1) 0%, rgba(0, 5, 13, 0.9668242296918768) 13%, rgba(0, 5, 13, 0.801) 31%, rgba(0, 5, 13, 0.671) 55%, rgba(0, 5, 13, 0.171) 100%);
 }
 
 .scale {

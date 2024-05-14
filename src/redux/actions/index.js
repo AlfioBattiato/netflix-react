@@ -135,7 +135,7 @@ export const postReviews = (id, body) => {
 
     try {
       const response = await fetch(`https://api.themoviedb.org/3/movie/${id}/rating?api_key=${apiKey}&guest_session_id=${guestId}`, options);
-      console.log("rate ok", await response.json());
+      await response.json()
     } catch (error) {
       console.error(`ERRORE nella pubblicazione della recensione per ${id}: ${error.message}`);
     }

@@ -86,7 +86,7 @@ function FilmDetails() {
     infinite: false,
     centerPadding: "60px",
     slidesToShow: 6,
-    slidesToScroll: 6,
+    slidesToScroll: 1,
     swipeToSlide: true,
     responsive: [
       {
@@ -192,7 +192,7 @@ function FilmDetails() {
           )}
           <div className="container">
             {rew && (<Reviews ></Reviews>)}
-            {simili && (
+            {simili.length>0 && (
               <>
                 <h3 className="mt-5">Similar Movie</h3>
                 <Slider {...settings}>

@@ -26,7 +26,7 @@ const MyCard = (props) => {
 
 
     return (
-        <Col className="col-6 col-md-4 col-lg 2 col-xl-2 position-relative  " style={{ height: "20rem", width: "96%" }}
+        <Col className="col-6 col-md-4 col-lg 2 col-xl-2 position-relative overflow-hidden  " style={{ height: "20rem", width: "96%" }}
             onMouseEnter={() => { setShow(''); setScale('scale') }}
             onMouseLeave={() => { setShow('d-none'); setScale('') }}>
             {props.film.poster_path ? (<img
