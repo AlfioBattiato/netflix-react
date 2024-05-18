@@ -8,18 +8,19 @@ import {
   Button,
   Dropdown,
 } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { search } from "../redux/actions";
 
 function MyNavbar() {
-  const dispatch=useDispatch()
+  const dispatch = useDispatch()
   const [isScrolled, setIsScrolled] = useState(false);
   const [parola, setParola] = useState("");
-  const navigate=useNavigate()
+  const navigate = useNavigate()
+  const myList = useSelector(state => state.myList)
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 200) {
+      if (window.scrollY > 20) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
@@ -31,7 +32,8 @@ function MyNavbar() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+
+  }, [myList]);
 
   const location = useLocation();
 
@@ -50,27 +52,40 @@ function MyNavbar() {
             <Link
               to={"/"}
               className={`nav-link ${location.pathname === "/" && "active"}`}
-              onClick={()=> window.scroll(0, 0)}
+              onClick={() => window.scroll(0, 0)}
             >
               Home
             </Link>
             <Link
               to={"/Tvshow"}
-              className={`nav-link ${
-                location.pathname === "/Tvshow" && "active"
-              }`}
-              onClick={()=> window.scroll(0, 0)}
+              className={`nav-link ${location.pathname === "/Tvshow" && "active"
+                }`}
+              onClick={() => window.scroll(0, 0)}
             >
               Tvshow
             </Link>
-            <Nav.Link href="#">My List</Nav.Link>
+            <Link
+              to={"/MyList"}
+              className={`nav-link ${location.pathname === "/MyList" && "active"
+                }`}
+              onClick={() => window.scroll(0, 0)}
+            >
+              <div className="position-relative">
+                <span className="z-3">  My List</span>
+                {myList.length > 0 && (
+                <span className="position-absolute  translate-middle badge rounded-pill  align-content-center  nfavorite">
+                  {myList.length} <span className="visually-hidden">unread messages</span></span>)}
+              </div>
+
+            </Link>
           </Nav>
+
           <Form
             className="d-flex"
             onChange={(e) => {
               setParola(e.target.value);
             }}
-            onSubmit={(e)=>{
+            onSubmit={(e) => {
               e.preventDefault()
               dispatch(search(parola))
               navigate("/search")
@@ -121,9 +136,13 @@ function MyNavbar() {
             <Dropdown align="end">
               <Dropdown.Toggle variant="" id="dropdown-basic"></Dropdown.Toggle>
               <Dropdown.Menu className="dk">
-                <Dropdown.Item href="#/">Profile</Dropdown.Item>
-                <Dropdown.Item href="#/">My list </Dropdown.Item>
-                <Dropdown.Item href="#/">Setting</Dropdown.Item>
+                <Dropdown.Item href="/">Profile</Dropdown.Item>
+
+                <Dropdown.Item href="/" className=" position-relative">
+                  My list
+                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-bg-secondary">+99 <span class="visually-hidden">unread messages</span></span>
+                </Dropdown.Item>
+                <Dropdown.Item href="/">Setting</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </div>

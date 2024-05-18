@@ -26,7 +26,7 @@ const MyCard = (props) => {
 
 
     return (
-        <Col className="col-6 col-md-4 col-lg 2 col-xl-2 position-relative overflow-hidden  " style={{ height: "20rem", width: "96%" }}
+        <div className="position-relative overflow-hidden  " style={{ height: "20rem", width: "96%" }}
             onMouseEnter={() => { setShow(''); setScale('scale') }}
             onMouseLeave={() => { setShow('d-none'); setScale('') }}>
             {props.film.poster_path ? (<img
@@ -44,7 +44,7 @@ const MyCard = (props) => {
                 <h6 className='fw-bold py-2 bebas2 '>{props.film.title ? props.film.title : props.film.original_name}</h6>
                 <div >
                     <p className='fw-semibold mb-0' style={{ color: "green" }}>imdbVotes: {props.film.vote_average}</p>
-                    <p className='fst-italic text-white mb-1'>Rate:{props.film.vote_average.toFixed(1)}</p>
+                    <p className='fst-italic text-white mb-1'>Rate:{props.film.vote_average?props.film.vote_average.toFixed(1):''}</p>
                     <div>
                         {[...Array(5)].map((_, index) => (
                             <svg key={index} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill={getCircleColor(props.film.vote_average, index)} className="bi bi-star-fill me-1" viewBox="0 0 16 16">
@@ -72,7 +72,7 @@ const MyCard = (props) => {
 
                 </div>
             </div>
-        </Col>
+        </div>
     );
 }
 

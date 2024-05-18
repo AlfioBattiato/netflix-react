@@ -13,6 +13,11 @@ export const GET_AIRINGTODAY = 'GET_AIRINGTODAY';
 export const GET_ONTHEAIR = 'GET_ONTHEAIR';
 export const GET_TVPOPULAR = 'GET_TVPOPULAR';
 export const GET_TVTOPRATED = 'GET_TVTOPRATED';
+// mylist
+export const ADD_TO_LIST = 'ADD_TO_LIST';
+export const REMOVE_FROM_LIST = 'REMOVE_FROM_LIST';
+
+
 
 const apiKey = "fe4cdf06ddd3985087ca7bae07a4bddb";
 const baseApiUrl = "https://api.themoviedb.org/3";
@@ -139,5 +144,17 @@ export const postReviews = (id, body) => {
     } catch (error) {
       console.error(`ERRORE nella pubblicazione della recensione per ${id}: ${error.message}`);
     }
+  };
+};
+export const addList = (movie) => { 
+  return (dispatch) => {
+    dispatch({ type: ADD_TO_LIST, payload: movie });
+    // alert("film aggiunto")
+  };
+};
+export const removeFromList = (movieId) => {
+  return (dispatch) => {
+    dispatch({ type: REMOVE_FROM_LIST, payload: movieId });
+   
   };
 };

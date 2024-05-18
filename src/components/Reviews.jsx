@@ -8,7 +8,7 @@ function Reviews() {
     const reviews = useSelector(state => state.reviews)
     const dispatch = useDispatch()
     
-    const { type, id } = useParams();
+    const { id } = useParams();
 
     const [number, setNumber] = useState(4)
     const [number2, setNumber2] = useState(0)
@@ -43,17 +43,23 @@ function Reviews() {
             return "gray";
         }
     };
+    const showmore=()=>{
+        
+        number<reviews.length? setNumber(number + 4):setNumber(null)
+    }
 
+    useEffect(()=>{
+        setReadmores(reviews.map(() => 400))
+    },[reviews])
 
 
     return (<>
-        <div className="container mt-3">
+        <div className=" mt-3">
             <h3>Reviews</h3>
             <div className="row">
                 <div className="col-12 col-md-9">
                     {reviews && reviews.length > 0 ? (
                         <>
-
                             {reviews.slice(0, number).map((e, index) => (
                                 <div key={e.id}>
                                     <div className="mt-3 d-flex align-items-center gap-2">
@@ -69,15 +75,15 @@ function Reviews() {
                                             </svg>
                                         ))}
                                     </div>
-                                    <div className="rounded border mt-2 p-3">
+                                    <div className="rounded border mt-2 p-3 overflow-hidden">
                                         <p dangerouslySetInnerHTML={{ __html: e.content.slice(0, readmores[index]) }}></p>
-                                        {e.content.length > readmores[index] ? (<span className="text-primary" style={{ cursor: "pointer" }} onClick={() => handleReadmoreClick(index)}>Read more...</span>) : ""}
+                                        {e.content.length > readmores[index] ? (<span className="text-primary fw-light" style={{ cursor: "pointer" }} onClick={() => handleReadmoreClick(index)}>Read more...</span>) : ""}
                                     </div>
                                 </div>
 
                             ))}
-                            {reviews.length > 4 && (
-                                <Button variant="outline-light" className="mt-2 w-100" onClick={() => setNumber(number + 4)}> <i className="bi bi-chevron-compact-down"></i></Button>
+                            {reviews.length > 4 && number<reviews.length && (
+                                <Button variant="outline-light" className="mt-2 w-100" onClick={() =>showmore()}> <i className="bi bi-chevron-compact-down"></i></Button>
 
                             )}
                         </>

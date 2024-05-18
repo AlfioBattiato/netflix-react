@@ -18,13 +18,14 @@ const ContainerCards = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+  
     dispatch(getFetch('movie','now_playing'));
     dispatch(getFetch('movie','upcoming'));
     dispatch(getFetch('movie','top_rated'));
     dispatch(getFetch('movie','popular'));
     setSpinner(false);
 
-  }, []);
+  }, [dispatch]);
 
   const renderMovies = (movies) => {
     if (!movies) {

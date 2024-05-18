@@ -4,7 +4,7 @@ import Cast from "./Cast";
 import Slider from "react-slick";
 import Trailer from "./Trailer";
 import { useDispatch, useSelector } from "react-redux";
-import { getReviews, similar } from "../redux/actions";
+import { addList, getReviews, similar } from "../redux/actions";
 import Reviews from "./Reviews";
 import MyCard from "./MyCard";
 import { useParams } from "react-router-dom";
@@ -16,9 +16,10 @@ function FilmDetails() {
   const [KeyVideo, setKeyVideo] = useState("");
   const rew = useSelector(state => state.reviews);
   const simili = useSelector(state => state.similar);
+  const [sendRate, setSendRate] = useState(false);
+  const [likeDisabled, setLikeDisabled] = useState(false);
 
   const { type, id } = useParams();
-
   const dispatch = useDispatch();
 
   const getDetails = async () => {
@@ -33,23 +34,17 @@ function FilmDetails() {
       const videoResponse = await fetch(`https://api.themoviedb.org/3/${type}/${id}/videos?language=en-US`, options);
       const videoData = await videoResponse.json();
       setVideo(videoData.results);
-      //  console.log('video',videoData.results)
 
       if (videoData.results.length > 0) {
-        const officialTrailer = videoData.results.find(video => video.name.includes("Official Trailer"));
-        const officialTrailer2 = videoData.results.find(video => video.name.includes("Trailer"));
-        if (officialTrailer) {
-          setKeyVideo(officialTrailer.key);
-        } else if (officialTrailer2) {
-          setKeyVideo(officialTrailer2.key);
-        } else {
-          setKeyVideo(videoData.results[0].key);
-        }
+        const officialTrailer = videoData.results.find(video => video.name.includes("Official Trailer")) ||
+          videoData.results.find(video => video.name.includes("Trailer"));
+        setKeyVideo(officialTrailer ? officialTrailer.key : videoData.results[0].key);
+      } else {
+        setKeyVideo("");
       }
 
       const detailsResponse = await fetch(`https://api.themoviedb.org/3/${type}/${id}?language=en-US`, options);
       const detailsData = await detailsResponse.json();
-      // console.log(detailsData)
       setDetails(detailsData);
 
       const castResponse = await fetch(`https://api.themoviedb.org/3/${type}/${id}/credits?language=en-US`, options);
@@ -61,8 +56,8 @@ function FilmDetails() {
   };
 
   useEffect(() => {
-    // console.log(type)
-    // console.log(id)
+    setLikeDisabled(false);
+    setSendRate(false);
     getDetails();
     dispatch(getReviews(type + "/", id));
     dispatch(similar(type + "/", id));
@@ -71,11 +66,7 @@ function FilmDetails() {
   const getCircleColor = (rating, index) => {
     const maxCircles = rating / 2;
     if (index < maxCircles) {
-      if (index === Math.floor(maxCircles) && rating % 2 === 0.5) {
-        return "#CF9C0E";
-      } else {
-        return "#CF9C0E";
-      }
+      return "#CF9C0E";
     } else {
       return "gray";
     }
@@ -104,6 +95,12 @@ function FilmDetails() {
         }
       }
     ]
+  };
+
+  const handleLikeClick = () => {
+    setLikeDisabled(true);
+    setSendRate(true);
+    dispatch(addList(details));
   };
 
   return (
@@ -154,12 +151,14 @@ function FilmDetails() {
                         </>
                       )}
                     </div>
-                    <div className="d-flex align-items-center gap-2 mt-5">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" className="bi bi-plus-circle " viewBox="0 0 16 16">
-                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
-                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
-                      </svg>
-                      <p className="m-0 fw-bold">Add my list</p>
+                    <div className="position-relative">
+                      <button className="btn btn-outline-success d-flex align-items-center gap-2 mt-5 " id="like" disabled={likeDisabled} onClick={handleLikeClick}>
+                        <i className="bi bi-hand-thumbs-up-fill"></i>
+                        <p className="m-0 fw-bold">Add to my list</p>
+                      </button>
+                      {sendRate && (
+                        <p className="text-success mt-3" id="pRating">Film added to favorites </p>
+                      )}
                     </div>
                   </Col>
                 </Row>
@@ -190,22 +189,25 @@ function FilmDetails() {
               <iframe width="100%" height="545" src={`https://www.youtube.com/embed/${KeyVideo}`} allowFullScreen></iframe>
             </div>
           )}
-          <div className="container">
-            {rew && (<Reviews ></Reviews>)}
-            {simili.length>0 && (
-              <>
-                <h3 className="mt-5">Similar Movie</h3>
-                <Slider {...settings}>
-                  {simili.map((e, index) => (
-                    e.poster_path && (
-                      <div className="" key={index}>
-                        <MyCard film={e} />
-                      </div>
-                    )
-                  ))}
-                </Slider>
-              </>
-            )}
+          <div className="container-xxxl">
+
+            <div className="container">
+              {rew && (<Reviews ></Reviews>)}
+              {simili.length > 0 && (
+                <>
+                  <h3 className="mt-5">Similar Movie</h3>
+                  <Slider {...settings}>
+                    {simili.map((e, index) => (
+                      e.poster_path && (
+                        <div className="" key={index}>
+                          <MyCard film={e} />
+                        </div>
+                      )
+                    ))}
+                  </Slider>
+                </>
+              )}
+            </div>
           </div>
         </>
       ) : (

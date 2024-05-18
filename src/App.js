@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+
 import "./App.css";
 import MyNavbar from "./components/MyNavbar";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -11,7 +11,8 @@ import FilmDetails from "./components/FilmDetails";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import RisultatoRicerca from "./components/RisultatoRicerca";
-
+import MyList from "./components/MyList";
+document.body.style.cursor = `url('/assets/mouse.png'), auto`;
 function App() {
 
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/Tvshow" element={<><MyHeader></MyHeader><Tvshow></Tvshow></>} />
           <Route path="/Detail/:type/:id" element={<FilmDetails></FilmDetails>} />
           <Route path="/search" element={<RisultatoRicerca></RisultatoRicerca>} />
+          <Route path="/MyList" element={<MyList/>} />
 
         </Routes>
 

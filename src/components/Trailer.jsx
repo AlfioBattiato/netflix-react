@@ -4,7 +4,7 @@ import React, {  useEffect,  } from "react";
 function Trailer(props) {
 
   useEffect(() => {
-  }, []);
+  }, [props]);
 
 
 

@@ -10,14 +10,21 @@
 body {
     font-family: "Poppins", sans-serif !important;
     margin: 0;
-
 }
-
+.like:hover{
+    color: green;
+    cursor: pointer;
+}
 .row {
     max-width: 100%;
     margin-inline: 0px !important;
 }
-
+.nfavorite{
+    left: 111%;
+    top:15%!important;
+    /* border: 1px solid  #E50914!important; */
+    color:  #E50914!important;
+}
 svg:hover {
     color: #E6020B !important;
     cursor: pointer;
@@ -30,6 +37,10 @@ svg:hover {
 .otherVideos:hover {
     color: #E6020B !important;
     cursor: pointer;
+}
+.btn-outline-danger:hover{
+    background-color: rgba(0, 128, 0, 0)!important;
+
 }
 
 .red {
@@ -171,7 +182,7 @@ body {
 
 .gradient {
     background: rgb(0, 5, 13);
-    background: linear-gradient(0deg, rgba(0, 5, 13, 1) 0%, rgba(0, 5, 13, 0.9668242296918768) 13%, rgba(0, 5, 13, 0.801) 31%, rgba(0, 5, 13, 0.671) 55%, rgba(0, 5, 13, 0.171) 100%);
+    background: linear-gradient(0deg, rgba(0, 5, 13, 1) 0%, rgba(0, 5, 13, 0.9668242296918768) 13%, rgba(0, 5, 13, 0.801) 31%, rgba(0, 5, 13, 0.671) 55%, rgba(0, 5, 13, 0.39) 100%);
 }
 
 .scale {
@@ -217,9 +228,9 @@ body {
 }
 
 @media screen and (max-width: 1200px) {
-    .slick-arrow {
+    /* .slick-arrow {
         display: none !important;
-    }
+    } */
 
     .carosel {
         height: 82vh !important;
