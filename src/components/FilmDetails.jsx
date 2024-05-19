@@ -61,7 +61,7 @@ function FilmDetails() {
     getDetails();
     dispatch(getReviews(type + "/", id));
     dispatch(similar(type + "/", id));
-  }, [type, id]);
+  }, [type, id,dispatch,getDetails]);
 
   const getCircleColor = (rating, index) => {
     const maxCircles = rating / 2;
