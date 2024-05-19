@@ -8,10 +8,11 @@ function Cast(props) {
         <div className="position-relative d-flex justify-content-center " onMouseEnter={() => { setShow('') }}
             onMouseLeave={() => { setShow('d-none') }}>
             <img
-                src={props.img ? `https://image.tmdb.org/t/p/original/${props.img}` : "/assets/avatar.jpg"}
+                src={props.img ? `https://image.tmdb.org/t/p/original/${props.img}.webp` : "/assets/avatar.jpg"}
                 alt="img"
                 width={"90%"}
                 height={"100%"}
+                loading="lazy"
 
             />
             <div className={` dk  castAnimation  ${show}`} style={{ width: "90%", height: "55%" }}

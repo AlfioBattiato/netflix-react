@@ -1,7 +1,7 @@
 
 import "./App.css";
 import MyNavbar from "./components/MyNavbar";
-// import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import Tvshow from "./components/Tvshow";
 import ContainerCards from "./components/ContainerCards";
 import MyFooter from "./components/MyFooter";
@@ -12,7 +12,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import RisultatoRicerca from "./components/RisultatoRicerca";
 import MyList from "./components/MyList";
-document.body.style.cursor = `url('/assets/mouse.png'), auto`;
 function App() {
 
   return (

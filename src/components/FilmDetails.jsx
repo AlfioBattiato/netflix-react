@@ -113,11 +113,12 @@ function FilmDetails() {
                 <Row className="gx-5">
                   <Col xs={12} md={4} className="pb-3">
                     <img
-                      src={`https://image.tmdb.org/t/p/original/${details.poster_path}`}
+                      src={`https://image.tmdb.org/t/p/original/${details.poster_path}.webp`}
                       alt="img"
                       width="100%"
                       style={{ objectFit: "contain", height: "100%" }}
                       className="rounded"
+                      loading="lazy"
                     ></img>
                   </Col>
                   <Col xs={12} md={8}>

@@ -53,7 +53,7 @@ function MyHeader() {
               <div
                 className=" carosel"
                 style={{
-                  backgroundImage: `url(https://image.tmdb.org/t/p/original/${film.backdrop_path})`,
+                  backgroundImage: `url(https://image.tmdb.org/t/p/original/${film.backdrop_path}.webp)`,
                   backgroundSize: "cover",
                   height: "75vh",
                   width: "100%",
@@ -61,6 +61,7 @@ function MyHeader() {
                   backgroundPositionX: "center",
                   display: "flex",
                   justifyContent: "center",
+                  
                 }}
               >
                 <div className="gradient w-100 h-100"></div>

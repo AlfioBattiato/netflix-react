@@ -98,7 +98,7 @@ function MyNavbar() {
               aria-label="Search"
               id="input"
             />
-            <Button variant="outline-dark border-0" type="submit">
+            <Button aria-label="Name" variant="outline-dark border-0" type="submit">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="25"
@@ -113,7 +113,7 @@ function MyNavbar() {
           </Form>
           {/* campana------------------------------------------------------------- */}
           <div className="d-flex align-items-center pt-3 pt-lg-0">
-            <Button variant="" className="border-none ms-auto">
+            <Button aria-label="Name" variant="" className="border-none ms-auto">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="20"
@@ -126,21 +126,20 @@ function MyNavbar() {
               </svg>
             </Button>
             {/* --------------------------------------------------------------avatar */}
-            <Nav.Link href="#" className="fw-bold text-white">
+            <Nav.Link href="" className="fw-bold text-white">
               KIDS
             </Nav.Link>
-            <Nav.Link href="#" className="ps-3  fw-bold text-white">
+            <Nav.Link href="" className="ps-3  fw-bold text-white">
               <img src="/assets/avatar.png" width="37rem" alt="" />
             </Nav.Link>
             {/*--------------------------------------------------------------- freccia dropdown */}
             <Dropdown align="end">
               <Dropdown.Toggle variant="" id="dropdown-basic"></Dropdown.Toggle>
-              <Dropdown.Menu className="dk">
+              <Dropdown.Menu className="bg-black mt-2">
                 <Dropdown.Item href="/">Profile</Dropdown.Item>
 
                 <Dropdown.Item href="/" className=" position-relative">
                   My list
-                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-bg-secondary">+99 <span class="visually-hidden">unread messages</span></span>
                 </Dropdown.Item>
                 <Dropdown.Item href="/">Setting</Dropdown.Item>
               </Dropdown.Menu>
