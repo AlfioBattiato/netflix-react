@@ -15,7 +15,7 @@ function Cast(props) {
                 loading="lazy"
 
             />
-            <div className={` dk  castAnimation  ${show}`} style={{ width: "90%", height: "55%" }}
+            <div className={` dk  m-0 castAnimation  ${show}`} style={{ width: "90%", height: "60%" }}
             >
                 <span className="">Actor:</span>
                 <p> {props.name}</p>
