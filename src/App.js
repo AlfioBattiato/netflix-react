@@ -1,7 +1,7 @@
 
 import "./App.css";
 import MyNavbar from "./components/MyNavbar";
-import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
 import Tvshow from "./components/Tvshow";
 import ContainerCards from "./components/ContainerCards";
 import MyFooter from "./components/MyFooter";

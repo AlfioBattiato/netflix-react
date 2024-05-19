@@ -28,13 +28,13 @@ const MyCard = (props) => {
         <div className="position-relative overflow-hidden  " style={{ height: "20rem", width: "96%" }}
             onMouseEnter={() => { setShow(''); setScale('scale') }}
             onMouseLeave={() => { setShow('d-none'); setScale('') }}>
-            {props.film.poster_path ? (<img
+            {props.film.poster_path ? (
+            <img
                 className={`${scale} rounded`}
-                src={`https://image.tmdb.org/t/p/original/${props.film.poster_path}`}
+                src={`https://image.tmdb.org/t/p/original/${props.film.poster_path}.webp`}
                 alt="img"
                 width="100%"
                 style={{ objectFit: "cover", height: "100%" }}
-
             />) : (
                 <p>No pictures</p>
             )}
