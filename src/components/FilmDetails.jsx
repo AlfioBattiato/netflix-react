@@ -186,7 +186,7 @@ function FilmDetails() {
             <div className="container">
               <h3 className="text-white mt-5">Official Videos  </h3>
               <Trailer video={video} funzione={setKeyVideo}></Trailer>
-              <iframe width="100%" height="545" src={`https://www.youtube.com/embed/${KeyVideo}`} allowFullScreen></iframe>
+              <iframe width="100%" height="545" src={`https://www.youtube.com/embed/${KeyVideo}`} allowFullScreen title={KeyVideo}></iframe>
             </div>
           )}
           <div className="container-xxxl">
