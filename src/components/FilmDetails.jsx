@@ -108,7 +108,7 @@ function FilmDetails() {
       {details ? (
         <>
           <div className=" bg-details" style={{ backgroundImage: `url(https://image.tmdb.org/t/p/original/${details.backdrop_path})` }}>
-            <div className="container-xxxl  pt-5 gradient ">
+            <div className="container-fluid  pt-5 gradient ">
               <div className="container py-5">
                 <Row className="gx-5">
                   <Col xs={12} md={4} className="pb-3">
@@ -189,7 +189,7 @@ function FilmDetails() {
               <iframe width="100%" height="545" src={`https://www.youtube.com/embed/${KeyVideo}`} allowFullScreen title={KeyVideo}></iframe>
             </div>
           )}
-          <div className="container-xxxl">
+          <div className="container-fluid">
 
             <div className="container">
               {rew && (<Reviews ></Reviews>)}

@@ -83,7 +83,7 @@ const Tvshow = () => {
   );
 
   return (
-    <div className="container-xxxl">
+    <div className="container-fluid">
       {renderSection('Airing today', airing_today)}
       {renderSection('On the air', on_the_air)}
       {renderSection('Top rated', topRated)}

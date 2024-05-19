@@ -3,7 +3,7 @@ import { Row, Col, Button } from "react-bootstrap";
 
 function MyFooter() {
   return (
-    <div className="container-xxxl pt-5">
+    <div className="container-fluid pt-5">
       <footer>
         <Row>
           <Col lg={3}></Col>

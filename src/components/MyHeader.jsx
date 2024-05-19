@@ -139,7 +139,7 @@ function MyHeader() {
           ))}
       </Carousel>
 
-      <div className="container-xxxl pt-5">
+      <div className="container-fluid pt-5">
         <div className="d-flex justify-content-between">
           <div className="d-flex gap-4 align-items-center">
             <h2>{isTvShowPath ? "TV Shows" : "Movies"}</h2>

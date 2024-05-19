@@ -84,7 +84,7 @@ const ContainerCards = () => {
   );
 
   return (
-    <div className="container-xxxl">
+    <div className="container-fluid">
       {renderSection('Upcoming Movies', upcoming)}
       {renderSection('Popular', popular)}
       {renderSection('Top rated', topRated)}
