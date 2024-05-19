@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
-import Col from 'react-bootstrap/Col';
 import { useNavigate } from "react-router-dom";
 
 const MyCard = (props) => {

@@ -24,7 +24,7 @@ const Tvshow = () => {
     dispatch(getFetch('tv','popular'));
     setSpinner(false);
 
-  }, []);
+  }, [dispatch]);
 
   const renderMovies = (movies) => {
     if (!movies) {
