@@ -12,7 +12,6 @@ function Cast(props) {
                 alt="img"
                 width={"90%"}
                 height={"100%"}
-                loading="lazy"
 
             />
             <div className={` dk  m-0 castAnimation  ${show}`} style={{ width: "90%", height: "60%" }}

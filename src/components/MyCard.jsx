@@ -35,7 +35,6 @@ const MyCard = (props) => {
                 alt="img"
                 width="100%"
                 style={{ objectFit: "cover", height: "100%" }}
-                loading="lazy"
             />) : (
                 <p>No pictures</p>
             )}

@@ -118,7 +118,6 @@ function FilmDetails() {
                       width="100%"
                       style={{ objectFit: "contain", height: "100%" }}
                       className="rounded"
-                      loading="lazy"
                     ></img>
                   </Col>
                   <Col xs={12} md={8}>
