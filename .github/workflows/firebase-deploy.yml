@@ -3,7 +3,7 @@ name: Deploy to Firebase Hosting on PR Merge
 on:
   push:
     branches:
-      - main  # Modifica questo branch se usi un altro branch per il deploy
+      - master  # Modifica questo branch se usi un altro branch per il deploy
 
 jobs:
   build_and_deploy:
