@@ -14,11 +14,11 @@ function Trailer(props) {
         Other Videos
       </a>
 
-      <ul className="dropdown-menu p-0 my-2" style={{maxHeight:"19rem",overflow:"scroll"}}>
+      <ul className="dropdown-menu p-0 my-1" style={{maxHeight:"19rem",overflow:"scroll"}}>
         <div className="dropdown  ">
           {props.video.map((film,index ) => (
 
-            <li key={index} className="bg-black p-1 otherVideos" onClick={()=>props.funzione(film.key)}>{film.name}</li>
+            <li key={index} className="dk3 p-1 otherVideos" onClick={()=>props.funzione(film.key)}>{film.name}</li>
 
           ))}
         </div>

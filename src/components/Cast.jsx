@@ -14,12 +14,12 @@ function Cast(props) {
                 height={"100%"}
 
             />
-            <div className={` dk  m-0 castAnimation  ${show}`} style={{ width: "90%", height: "60%" }}
+            <div className={` dk3  m-0 castAnimation  ${show}`} style={{ width: "90%", height: "60%" }}
             >
                 <span className="">Actor:</span>
                 <p> {props.name}</p>
                 <span>Role:</span>
-                <p className="text-danger "  >{props.character}</p>
+                <p className="text-blue fw-bold "  >{props.character}</p>
 
             </div>
         </div>

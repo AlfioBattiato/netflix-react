@@ -77,7 +77,7 @@ function Reviews() {
                                     </div>
                                     <div className="rounded border mt-2 p-3 overflow-hidden">
                                         <p dangerouslySetInnerHTML={{ __html: e.content.slice(0, readmores[index]) }}></p>
-                                        {e.content.length > readmores[index] ? (<span className="text-primary fw-light" style={{ cursor: "pointer" }} onClick={() => handleReadmoreClick(index)}>Read more...</span>) : ""}
+                                        {e.content.length > readmores[index] ? (<span className="text-blue fw-light" style={{ cursor: "pointer" }} onClick={() => handleReadmoreClick(index)}>Read more...</span>) : ""}
                                     </div>
                                 </div>
 
@@ -90,7 +90,7 @@ function Reviews() {
                     ) : (<p> 0 Reviews</p>)}
                 </div>
                 <div className="col-12 col-md-3">
-                    <h5 className="text-primary mt-2">Rate Movie</h5>
+                    <h5 className="text-blue mt-2">Rate Movie</h5>
                     <p>User: {user}</p>
                     <p>Rate: {number2}</p>
                     {[...Array(10)].map((e, index) => (

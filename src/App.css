@@ -26,7 +26,7 @@ body {
     color:  #E50914!important;
 }
 svg:hover {
-    color: #E6020B !important;
+    color: #078BCF !important;
     cursor: pointer;
 }
 
@@ -35,7 +35,7 @@ svg:hover {
 }
 
 .otherVideos:hover {
-    color: #E6020B !important;
+    color: #078BCF !important;
     cursor: pointer;
 }
 .btn-outline-danger:hover{
@@ -174,11 +174,19 @@ body {
     border-radius: 0 !important;
 
 }
-
+.text-blue{
+    color: #078BCF!important;
+}
+.bg-blue{
+    background-color: #078BCF!important;
+}
 .dk2 {
     background-color: #00050d !important;
-    border-bottom: 0.5px solid red;
+    border-bottom: 0.5px solid #078BCF;
     
+}
+.dk3 {
+    background-color: #00050de7 !important;
 }
 
 .gradient {

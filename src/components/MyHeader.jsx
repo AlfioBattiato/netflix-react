@@ -31,9 +31,9 @@ function MyHeader() {
     const maxCircles = rating / 2;
     if (index < maxCircles) {
       if (index === Math.floor(maxCircles) && rating % 2 === 0.5) {
-        return "red";
+        return "#078BCF";
       } else {
-        return "red";
+        return "#078BCF";
       }
     } else {
       return "gray";
@@ -91,13 +91,13 @@ function MyHeader() {
                         <i className="bi bi-badge-4k text-success fs-4"></i>
                       </span>
                     </div>
-                    <p className="text-red fw-semibold pt-2 m-0">
+                    <p className="text-blue fw-semibold pt-2 m-0">
                       Release date{" "}
                       <span className="text-white">
                         {film.release_date ? film.release_date : film.first_air_date}
                       </span>
                     </p>
-                    <p className="text-red fw-semibold">
+                    <p className="text-blue fw-semibold">
                       Language<span className="text-white"> {film.original_language}</span>
                     </p>
                     <p className="mt-3 text-light">
@@ -105,7 +105,7 @@ function MyHeader() {
                         ? film.overview.substring(0, 100) + "..."
                         : film.overview}
                     </p>
-                    <Button className="red" size="lg" onClick={() => {
+                    <Button className="bg-blue" size="lg" onClick={() => {
                       const url = `/Detail/${film.original_name ? 'tv/' + film.id : 'movie/' + film.id}`;
                       navigate(url);
                     }}>

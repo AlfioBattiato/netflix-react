@@ -44,7 +44,7 @@ function MyNavbar() {
       className={`w-100 dk navbar-scrolled ${isScrolled && "navbar-scrolled dk2"}`}
     >
       <Container fluid>
-        <img src="/assets/netflix_logo.png" alt="logo" width="120rem" />
+        <img src="/assets/cine.png" alt="logo" width="200rem" className="m-3"/>
 
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">

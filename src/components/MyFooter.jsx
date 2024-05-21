@@ -177,7 +177,7 @@ function MyFooter() {
               Service Code
             </Button>
             <p className="text-secondary fs-6 pt-3">
-              ©1997-2019 Netflix, Inc. (i-0d00fcda2fd19c0de)
+              ©Create by Alfio Battiato
             </p>
           </Col>
           <Col lg={3}></Col>
