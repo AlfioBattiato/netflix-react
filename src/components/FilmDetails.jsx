@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Col, Row } from "react-bootstrap";
 import Cast from "./Cast";
-import Slider from "react-slick";
+
 import Trailer from "./Trailer";
 import { useDispatch, useSelector } from "react-redux";
 import { addList, getReviews, similar } from "../redux/actions";
 import Reviews from "./Reviews";
 import MyCard from "./MyCard";
 import { useParams } from "react-router-dom";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+import MySpinner from "./MySpinner";
 
 function FilmDetails() {
   const [details, setDetails] = useState([]);
@@ -18,6 +21,7 @@ function FilmDetails() {
   const simili = useSelector(state => state.similar);
   const [sendRate, setSendRate] = useState(false);
   const [likeDisabled, setLikeDisabled] = useState(false);
+  const [spinner, setSpinner] = useState(true);
 
   const { type, id } = useParams();
   const dispatch = useDispatch();
@@ -61,7 +65,8 @@ function FilmDetails() {
     getDetails();
     dispatch(getReviews(type + "/", id));
     dispatch(similar(type + "/", id));
-  }, [type, id,dispatch]);
+    setSpinner(false);
+  }, [type, id, dispatch]);
 
   const getCircleColor = (rating, index) => {
     const maxCircles = rating / 2;
@@ -72,35 +77,34 @@ function FilmDetails() {
     }
   };
 
-  const settings = {
-    className: "center",
-    infinite: false,
-    centerPadding: "60px",
-    slidesToShow: 6,
-    slidesToScroll: 1,
-    swipeToSlide: true,
-    responsive: [
-      {
-        breakpoint: 1200,
-        settings: {
-          slidesToShow: 4,
-          slidesToScroll: 4
-        }
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2
-        }
-      }
-    ]
-  };
 
   const handleLikeClick = () => {
     setLikeDisabled(true);
     setSendRate(true);
     dispatch(addList(details));
+  };
+
+  const responsive = {
+    superLargeDesktop: {
+      breakpoint: { max: 4000, min: 1400 },
+      items: 6,
+      slidesToSlide: 6
+    },
+    desktop: {
+      breakpoint: { max: 1400, min: 900 },
+      items: 4,
+      slidesToSlide: 3
+    },
+    tablet: {
+      breakpoint: { max: 900, min: 555 },
+      items: 3,
+      slidesToSlide: 2
+    },
+    mobile: {
+      breakpoint: { max: 555, min: 0 },
+      items: 2,
+      slidesToSlide: 2
+    }
   };
 
   return (
@@ -164,18 +168,22 @@ function FilmDetails() {
                 </Row>
               </div>
 
+
               {cast.length > 0 && (
                 <div className="container">
-                  <h3 >Top Cast</h3>
-                  <Slider {...settings}>
+                  <h3>Top Cast</h3>
+                  <Carousel responsive={responsive}>
                     {cast.map((e, index) => (
-                      <div className="" key={index}>
-                        <Cast img={e.profile_path} character={e.character} name={e.name} ></Cast>
+                      <div key={index}>
+                        <Cast img={e.profile_path} character={e.character} name={e.name} />
                       </div>
                     ))}
-                  </Slider>
+                  </Carousel>
                 </div>
               )}
+
+
+
             </div>
           </div>
           {KeyVideo === "" ? (
@@ -185,30 +193,46 @@ function FilmDetails() {
           ) : (
             <div className="container">
               <h3 className="text-white mt-5">Official Videos  </h3>
-              <Trailer video={video} funzione={setKeyVideo}></Trailer>
               <iframe width="100%" height="545" src={`https://www.youtube.com/embed/${KeyVideo}`} allowFullScreen title={KeyVideo}></iframe>
+              <h3 className="text-white mt-5">Other Videos  </h3>
+              <Carousel responsive={responsive}>
+                  {video.map((e, index) => (
+                    <div key={index}>
+                      <img
+                        src={`https://img.youtube.com/vi/${e.key}/0.jpg`}
+                        alt={`Video Thumbnail ${index}`}
+                        style={{ width: '90%', height: 'auto' }}
+                        onClick={()=>setKeyVideo(e.key)}
+                      />
+                    </div>
+                  ))}
+                </Carousel>
             </div>
           )}
-          <div className="container-fluid">
 
-            <div className="container">
+
+   
+            <div className="container pt-5">
               {rew && (<Reviews ></Reviews>)}
+
               {simili.length > 0 && (
-                <>
-                  <h3 className="mt-5">Similar Movie</h3>
-                  <Slider {...settings}>
+                <div className="container">
+                  <h3 className="mt-5">Similar Movies</h3>
+                  <Carousel responsive={responsive}>
                     {simili.map((e, index) => (
                       e.poster_path && (
-                        <div className="" key={index}>
+                        <div key={index}>
                           <MyCard film={e} />
                         </div>
                       )
                     ))}
-                  </Slider>
-                </>
+                  </Carousel>
+                </div>
               )}
+
             </div>
-          </div>
+         
+
         </>
       ) : (
         <div className="spinner-border" role="status">

@@ -11,20 +11,24 @@ body {
     font-family: "Poppins", sans-serif !important;
     margin: 0;
 }
-.like:hover{
+
+.like:hover {
     color: green;
     cursor: pointer;
 }
+
 .row {
     max-width: 100%;
     margin-inline: 0px !important;
 }
-.nfavorite{
+
+.nfavorite {
     left: 111%;
-    top:15%!important;
+    top: 15% !important;
     /* border: 1px solid  #E50914!important; */
-    color:  #E50914!important;
+    color: #E50914 !important;
 }
+
 svg:hover {
     color: #078BCF !important;
     cursor: pointer;
@@ -38,8 +42,9 @@ svg:hover {
     color: #078BCF !important;
     cursor: pointer;
 }
-.btn-outline-danger:hover{
-    background-color: rgba(0, 128, 0, 0)!important;
+
+.btn-outline-danger:hover {
+    background-color: rgba(0, 128, 0, 0) !important;
 
 }
 
@@ -103,10 +108,11 @@ svg:hover {
     }
 }
 
+
 .castAnimation {
+    background-color: #00050db2 !important;
     position: absolute !important;
     bottom: 0px;
-    animation: slideIn 0.5s ease forwards
 }
 
 .info {
@@ -174,20 +180,21 @@ body {
     border-radius: 0 !important;
 
 }
-.text-blue{
-    color: #078BCF!important;
+
+.text-blue {
+    color: #078BCF !important;
 }
-.bg-blue{
-    background-color: #078BCF!important;
+
+.bg-blue {
+    background-color: #078BCF !important;
 }
+
 .dk2 {
     background-color: #00050d !important;
     border-bottom: 0.5px solid #078BCF;
-    
+
 }
-.dk3 {
-    background-color: #00050de7 !important;
-}
+
 
 .gradient {
     background: rgb(0, 5, 13);
@@ -209,7 +216,7 @@ body {
 
 .settings {
     background-color: white;
-    
+
 }
 
 @media screen and (min-width: 1500px) {

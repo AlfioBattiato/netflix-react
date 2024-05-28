@@ -7,8 +7,8 @@ import "react-multi-carousel/lib/styles.css";
 import { useDispatch, useSelector } from 'react-redux';
 import { getFetch } from "../redux/actions";
 
-const ContainerCards = () => {
-  const [spinner, setSpinner] = useState(true);
+const Homepage = () => {
+  const [loading, setLoading] = useState(true);
 
   const nowPlaying = useSelector(state => state.nowplaying);
   const upcoming = useSelector(state => state.upcoming);
@@ -18,13 +18,18 @@ const ContainerCards = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-  
-    dispatch(getFetch('movie','now_playing'));
-    dispatch(getFetch('movie','upcoming'));
-    dispatch(getFetch('movie','top_rated'));
-    dispatch(getFetch('movie','popular'));
-    setSpinner(false);
+    const fetchData = async () => {
+      setLoading(true);
+      await Promise.all([
+        dispatch(getFetch('movie', 'now_playing')),
+        dispatch(getFetch('movie', 'upcoming')),
+        dispatch(getFetch('movie', 'top_rated')),
+        dispatch(getFetch('movie', 'popular')),
+      ]);
+      setLoading(false);
+    };
 
+    fetchData();
   }, [dispatch]);
 
   const renderMovies = (movies) => {
@@ -54,43 +59,55 @@ const ContainerCards = () => {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 1400 },
       items: 7,
-       slidesToSlide: 6
+      slidesToSlide: 1
     },
     desktop: {
       breakpoint: { max: 1400, min: 900 },
       items: 4,
-       slidesToSlide: 3
+      slidesToSlide: 3
     },
     tablet: {
       breakpoint: { max: 900, min: 555 },
       items: 3,
-       slidesToSlide: 2
+      slidesToSlide: 2
     },
     mobile: {
       breakpoint: { max: 555, min: 0 },
       items: 2,
-       slidesToSlide: 2
+      slidesToSlide: 2
     }
   };
 
   const renderSection = (title, movies) => (
     <>
       <h3 className="pt-5">{title}</h3>
-      {spinner && <MySpinner />}
+
+
       <Row className="gx-2 gy-2">
-        <Carousel responsive={responsive}>{renderMovies(movies)}</Carousel>
+        <Carousel responsive={responsive} autoPlay autoPlaySpeed={10000} infinite>
+          {renderMovies(movies)}
+        </Carousel>
       </Row>
+
     </>
   );
 
   return (
     <div className="container-fluid">
-      {renderSection('Upcoming Movies', upcoming)}
-      {renderSection('Popular', popular)}
-      {renderSection('Top rated', topRated)}
-      {renderSection('Now Playing', nowPlaying)}
+      {loading ? (
+        <MySpinner />
+      ) : (
+        <>
+          {renderSection('Upcoming Movies', upcoming)}
+          {renderSection('Popular', popular)}
+          {renderSection('Top rated', topRated)}
+          {renderSection('Now Playing', nowPlaying)}
+        </>
+      )}
+
+
     </div>
   );
 };
 
-export default ContainerCards;
+export default Homepage;

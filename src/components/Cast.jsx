@@ -1,12 +1,12 @@
 import { useState } from "react";
 
 function Cast(props) {
-    const [show, setShow] = useState('d-none');
+    // const [show, setShow] = useState('d-none');
 
 
     return (
-        <div className="position-relative d-flex justify-content-center " onMouseEnter={() => { setShow('') }}
-            onMouseLeave={() => { setShow('d-none') }}>
+        <div className="">
+            <p className="mb-1 "> {props.name}</p>
             <img
                 src={props.img ? `https://image.tmdb.org/t/p/original/${props.img}.webp` : "/assets/avatar.jpg"}
                 alt="img"
@@ -14,12 +14,10 @@ function Cast(props) {
                 height={"100%"}
 
             />
-            <div className={` dk3  m-0 castAnimation  ${show}`} style={{ width: "90%", height: "60%" }}
-            >
-                <span className="">Actor:</span>
-                <p> {props.name}</p>
+            <div className={`m-0 p-1 castAnimation`} style={{ width: "90%", height: "25%" }}>
+           
                 <span>Role:</span>
-                <p className="text-blue fw-bold "  >{props.character}</p>
+                <p className="text-blue fw-bold ">{props.character}</p>
 
             </div>
         </div>

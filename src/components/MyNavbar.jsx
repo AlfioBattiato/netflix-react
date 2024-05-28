@@ -37,6 +37,18 @@ function MyNavbar() {
 
   const location = useLocation();
 
+
+  const handleclick = () => {
+    const navbarElement = document.getElementById('navbarScroll');
+    const navbarbtn = document.getElementsByClassName('navbar-toggler')[0];
+    if (navbarElement.classList.contains('show')) {
+        navbarbtn.click(); // Simula un clic sul pulsante per chiudere la navbar
+    }
+    window.scroll(0, 0)
+   
+
+}
+
   return (
     <Navbar
       fixed="top"
@@ -46,13 +58,13 @@ function MyNavbar() {
       <Container fluid>
         <img src="/assets/cine.png" alt="logo" width="200rem" className="m-3"/>
 
-        <Navbar.Toggle aria-controls="navbarScroll" />
-        <Navbar.Collapse id="navbarScroll">
-          <Nav className="me-auto my-2 my-lg-0" navbarScroll>
+        <Navbar.Toggle aria-controls="navbarScroll"  />
+        <Navbar.Collapse id="navbarScroll" className="">
+          <Nav className="me-auto my-2 my-lg-0 d-flex" navbarScroll>
             <Link
               to={"/"}
               className={`nav-link ${location.pathname === "/" && "active"}`}
-              onClick={() => window.scroll(0, 0)}
+              onClick={() =>  handleclick()}
             >
               Home
             </Link>
@@ -60,17 +72,17 @@ function MyNavbar() {
               to={"/Tvshow"}
               className={`nav-link ${location.pathname === "/Tvshow" && "active"
                 }`}
-              onClick={() => window.scroll(0, 0)}
+              onClick={() =>  handleclick()}
             >
               Tvshow
             </Link>
             <Link
               to={"/MyList"}
-              className={`nav-link ${location.pathname === "/MyList" && "active"
+              className={` nav-link ${location.pathname === "/MyList" && "active"
                 }`}
-              onClick={() => window.scroll(0, 0)}
+              onClick={() =>  handleclick()}
             >
-              <div className="position-relative">
+              <div className="position-relative d-inline">
                 <span className="z-3">  My List</span>
                 {myList.length > 0 && (
                 <span className="position-absolute  translate-middle badge rounded-pill  align-content-center  nfavorite">
@@ -111,40 +123,7 @@ function MyNavbar() {
               </svg>
             </Button>
           </Form>
-          {/* campana------------------------------------------------------------- */}
-          <div className="d-flex align-items-center pt-3 pt-lg-0">
-            <Button aria-label="Name" variant="" className="border-none ms-auto">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                fill="white"
-                className="bi bi-bell-fill"
-                viewBox="0 0 16 16"
-              >
-                <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2m.995-14.901a1 1 0 1 0-1.99 0A5 5 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901" />
-              </svg>
-            </Button>
-            {/* --------------------------------------------------------------avatar */}
-            <Nav.Link href="" className="fw-bold text-white">
-              KIDS
-            </Nav.Link>
-            <Nav.Link href="" className="ps-3  fw-bold text-white">
-              <img src="/assets/avatar.png" width="37rem" alt="" />
-            </Nav.Link>
-            {/*--------------------------------------------------------------- freccia dropdown */}
-            <Dropdown align="end">
-              <Dropdown.Toggle variant="" id="dropdown-basic"></Dropdown.Toggle>
-              <Dropdown.Menu className="bg-black mt-2">
-                <Dropdown.Item href="/">Profile</Dropdown.Item>
-
-                <Dropdown.Item href="/" className=" position-relative">
-                  My list
-                </Dropdown.Item>
-                <Dropdown.Item href="/">Setting</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-          </div>
+       
         </Navbar.Collapse>
       </Container>
     </Navbar>

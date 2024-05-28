@@ -3,7 +3,7 @@ import "./App.css";
 import MyNavbar from "./components/MyNavbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Tvshow from "./components/Tvshow";
-import ContainerCards from "./components/ContainerCards";
+import Homepage from "./components/Homepage";
 import MyFooter from "./components/MyFooter";
 import MyHeader from "./components/MyHeader";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -24,7 +24,7 @@ function App() {
             element={
               <>
                 <MyHeader></MyHeader>
-                <ContainerCards></ContainerCards>
+                <Homepage></Homepage>
               </>
             }
           ></Route>
