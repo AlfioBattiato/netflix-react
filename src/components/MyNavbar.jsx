@@ -41,12 +41,12 @@ function MyNavbar() {
     const navbarElement = document.getElementById('navbarScroll');
     const navbarbtn = document.getElementsByClassName('navbar-toggler')[0];
     if (navbarElement.classList.contains('show')) {
-        navbarbtn.click(); // Simula un clic sul pulsante per chiudere la navbar
+      navbarbtn.click(); // Simula un clic sul pulsante per chiudere la navbar
     }
     window.scroll(0, 0)
-   
 
-}
+
+  }
 
   return (
     <Navbar
@@ -55,15 +55,22 @@ function MyNavbar() {
       className={`w-100 dk navbar-scrolled ${isScrolled && "navbar-scrolled dk2"}`}
     >
       <Container fluid>
-      <img src="/assets/cine.png" alt="logo" width="200rem" height="auto" class="m-3"/>
+        <Link
+          to={"/"}
+          className={`nav-link ${location.pathname === "/" && "active"}`}
+          onClick={() => handleclick()}
+        >
+          <img src="/assets/cine.png" alt="logo" width="200rem" height="auto" class="m-3" />
 
-        <Navbar.Toggle aria-controls="navbarScroll"  />
+        </Link>
+
+        <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll" className="">
           <Nav className="me-auto my-2 my-lg-0 d-flex" navbarScroll>
             <Link
               to={"/"}
               className={`nav-link ${location.pathname === "/" && "active"}`}
-              onClick={() =>  handleclick()}
+              onClick={() => handleclick()}
             >
               Home
             </Link>
@@ -71,7 +78,7 @@ function MyNavbar() {
               to={"/Tvshow"}
               className={`nav-link ${location.pathname === "/Tvshow" && "active"
                 }`}
-              onClick={() =>  handleclick()}
+              onClick={() => handleclick()}
             >
               Tvshow
             </Link>
@@ -79,13 +86,13 @@ function MyNavbar() {
               to={"/MyList"}
               className={` nav-link ${location.pathname === "/MyList" && "active"
                 }`}
-              onClick={() =>  handleclick()}
+              onClick={() => handleclick()}
             >
               <div className="position-relative d-inline">
                 <span className="z-3">  My List</span>
                 {myList.length > 0 && (
-                <span className="position-absolute  translate-middle badge rounded-pill  align-content-center  nfavorite">
-                  {myList.length} <span className="visually-hidden">unread messages</span></span>)}
+                  <span className="position-absolute  translate-middle badge rounded-pill  align-content-center  nfavorite">
+                    {myList.length} <span className="visually-hidden">unread messages</span></span>)}
               </div>
 
             </Link>
@@ -122,7 +129,7 @@ function MyNavbar() {
               </svg>
             </Button>
           </Form>
-       
+
         </Navbar.Collapse>
       </Container>
     </Navbar>

@@ -113,6 +113,8 @@ svg:hover {
     background-color: #00050db2 !important;
     position: absolute !important;
     bottom: 0px;
+    animation: slideIn 0.5s ease forwards;
+
 }
 
 .info {
