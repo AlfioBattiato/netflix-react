@@ -6,7 +6,6 @@ import {
   Nav,
   Form,
   Button,
-  Dropdown,
 } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { search } from "../redux/actions";

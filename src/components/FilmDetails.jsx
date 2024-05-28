@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Col, Row } from "react-bootstrap";
 import Cast from "./Cast";
-
-import Trailer from "./Trailer";
 import { useDispatch, useSelector } from "react-redux";
 import { addList, getReviews, similar } from "../redux/actions";
 import Reviews from "./Reviews";
