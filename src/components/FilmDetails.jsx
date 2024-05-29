@@ -192,7 +192,7 @@ function FilmDetails() {
             <div className="container">
               <h3 className="text-white mt-5">Official Videos  </h3>
               <iframe width="100%" height="545" src={`https://www.youtube.com/embed/${KeyVideo}`} allowFullScreen title={KeyVideo}></iframe>
-              <h3 className="text-white mt-5">Other Videos  </h3>
+              <h3 className="text-white mt-5">Related Videos  </h3>
               <Carousel responsive={responsive}>
                   {video.map((e, index) => (
                     <div key={index}>
