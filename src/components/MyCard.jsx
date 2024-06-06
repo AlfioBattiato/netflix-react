@@ -37,9 +37,7 @@ const MyCard = (props) => {
                 <p>No pictures</p>
             )}
 
-            <div className={`info p-4 d-flex align-items-center justify-content-center ${show}  rounded`} onClick={() => {
-               handleclick()
-            }} >
+            <div className={`info p-4 d-flex align-items-center justify-content-center ${show}  rounded`}>
               
                 <svg
                     fill="currentColor"

@@ -6,8 +6,7 @@
     margin-inline: 0px !important;
 
 }
-
-body {
+html,body {
     font-family: "Poppins", sans-serif !important;
     margin: 0;
 }
@@ -158,11 +157,6 @@ code {
         monospace;
 }
 
-html,
-
-body {
-    margin: 0px;
-}
 
 
 #input {
@@ -240,6 +234,9 @@ body {
     .dk {
         background-color: #00050d !important;
         margin-bottom: 1rem;
+    }
+    .my-1{
+        font-size: 14px!important;
     }
 
 }

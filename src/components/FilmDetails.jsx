@@ -22,6 +22,7 @@ function FilmDetails() {
   const [spinner, setSpinner] = useState(true);
 
   const { type, id } = useParams();
+  
   const dispatch = useDispatch();
 
   const getDetails = async () => {
