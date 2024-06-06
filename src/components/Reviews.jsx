@@ -63,7 +63,7 @@ function Reviews() {
                             {reviews.slice(0, number).map((e, index) => (
                                 <div key={e.id}>
                                     <div className="mt-3 d-flex align-items-center gap-2">
-                                        <img  src={e.author_details.avatar_path ? `https://image.tmdb.org/t/p/original/${e.author_details.avatar_path}.webp ` : "/assets/avatar.jpg"} style={{ width: "3rem", objectFit: "cover", height: "3rem", borderRadius: "50%" }} alt="avatar" />
+                                        <img  src={e.author_details.avatar_path ? `https://image.tmdb.org/t/p/original/${e.author_details.avatar_path}.webp ` : "/assets/Missing_photo.svg"} style={{ width: "3rem", objectFit: "cover", height: "3rem", borderRadius: "50%" }} alt="avatar" />
                                         <p className="m-0">{e.author}</p>
                                     </div>
                                     <div className="d-flex mt-2">
