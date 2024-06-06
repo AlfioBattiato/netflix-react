@@ -187,7 +187,7 @@ function FilmDetails() {
           </div>
           {KeyVideo === "" ? (
             <div className="container">
-              <h3 className=" pb-5 mt-5" style={{ color: "red" }}>Nessun trailer disponibile </h3>
+              <h3 className=" pb-5 mt-5" style={{ color: "red" }}>No trailer available </h3>
             </div>
           ) : (
             <div className="container">
