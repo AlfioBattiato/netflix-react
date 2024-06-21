@@ -107,6 +107,7 @@ function MyNavbar() {
               e.preventDefault()
               dispatch(search(parola))
               navigate("/search")
+              handleclick()
             }}
           >
             <Form.Control
